@@ -9,4 +9,8 @@ class Position extends Model
     public function employees(){
         return $this->hasMany(Employee::class);
     }
+
+    public function drivers(){
+        return $this->hasMany(Driver::class);
+    }
 }
