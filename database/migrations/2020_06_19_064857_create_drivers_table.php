@@ -17,6 +17,7 @@ class CreateDriversTable extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('company_id');
+            $table->unsignedBigInteger('position_id');
             $table->date('birth');
             $table->string('driver');
             $table->string('home_terminal');
@@ -31,6 +32,7 @@ class CreateDriversTable extends Migration
 
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('position_id')->references('id')->on('positions')->onDelete('cascade');
 
             $table->timestamps();
         });
