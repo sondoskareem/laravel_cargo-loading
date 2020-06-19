@@ -27,10 +27,10 @@ class CreateDriversTable extends Migration
             $table->date('dl_exp');
             $table->date('medical_exp');
             $table->integer('paye_rate');
-            $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
+            $table->timestamps();
         });
     }
 

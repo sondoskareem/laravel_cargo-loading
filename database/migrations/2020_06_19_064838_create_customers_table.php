@@ -22,11 +22,10 @@ class CreateCustomersTable extends Migration
             $table->string('website');
             $table->boolean('invoive_factoring_approvment');
             $table->boolean('invoice_mail');
-            $table->timestamps();
-
+            
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-
+            $table->timestamps();
         });
     }
 

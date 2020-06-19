@@ -15,16 +15,14 @@ class CreateEmployeesTable extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->foreignId('position_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('position_id');
             $table->date('birth');
             $table->string('paye_rate_per_hour');
             $table->string('education');
-            $table->timestamps();
-
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            // $table->foreign('position_id')->references('id')->on('positions')->onDelete('cascade');
-
+            $table->foreign('position_id')->references('id')->on('positions')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
