@@ -19,12 +19,12 @@ class CreateEmployeesTable extends Migration
             $table->unsignedBigInteger('position_id');
             $table->unsignedBigInteger('company_id');
             $table->date('birth');
-            $table->string('paye_rate_per_hour');
+            $table->integer('paye_rate_per_hour');
             $table->string('education');
 
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('position_id')->references('id')->on('positions')->onDelete('cascade');
+            $table->foreign('position_id')->references('id')->on('positions');
             $table->timestamps();
         });
     }

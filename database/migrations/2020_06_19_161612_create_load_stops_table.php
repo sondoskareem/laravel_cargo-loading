@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRepresentativesTable extends Migration
+class CreateLoadStopsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,11 @@ class CreateRepresentativesTable extends Migration
      */
     public function up()
     {
-        Schema::create('representatives', function (Blueprint $table) {
+        Schema::create('load_stops', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('factoring_id');
-            $table->string('representative');
-            $table->integer('rep_phone');
-            $table->string('rep_email');
-            $table->string('payment_email');
+            $table->foreignId('company_id');
+            $table->string('car_type');
             $table->timestamps();
-
             $table->foreign('factoring_id')->references('id')->on('factorings');
 
         });
@@ -34,6 +30,6 @@ class CreateRepresentativesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('representatives');
+        Schema::dropIfExists('load_stops');
     }
 }

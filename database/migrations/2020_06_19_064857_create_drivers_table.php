@@ -27,7 +27,7 @@ class CreateDriversTable extends Migration
             $table->boolean('double_triple');
             $table->date('dl_exp');
             $table->date('medical_exp');
-            $table->integer('paye_rate');
+            $table->integer('pay_rate');
 
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
