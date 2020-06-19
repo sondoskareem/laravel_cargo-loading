@@ -16,6 +16,7 @@ class CreateDriversTable extends Migration
         Schema::create('drivers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
+            $table->foreignId('company_id');
             $table->date('birth');
             $table->string('driver');
             $table->string('home_terminal');
@@ -28,6 +29,7 @@ class CreateDriversTable extends Migration
             $table->date('medical_exp');
             $table->integer('paye_rate');
 
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->timestamps();

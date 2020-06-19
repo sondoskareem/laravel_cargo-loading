@@ -15,7 +15,20 @@ class CreateFactoringsTable extends Migration
     {
         Schema::create('factorings', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('company_id');
+            $table->string('name');
+            $table->string('address');
+            $table->integer('phone');
+            $table->string('fax');
+            $table->string('contract_exp');
+            $table->integer('advanced_rate');
+            $table->integer('reserve_ammount');
+            $table->integer('escrow_fee');
+            $table->integer('monthly_minimum');
             $table->timestamps();
+
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
+
         });
     }
 

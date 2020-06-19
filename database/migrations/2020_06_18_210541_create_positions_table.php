@@ -16,7 +16,11 @@ class CreatePositionsTable extends Migration
         Schema::create('positions', function (Blueprint $table) {
             $table->id();
             $table->string('description');
+            $table->unsignedBigInteger('company_id');
             $table->timestamps();
+
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
+
         });
     }
 

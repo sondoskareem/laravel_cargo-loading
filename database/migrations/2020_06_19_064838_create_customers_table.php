@@ -16,14 +16,14 @@ class CreateCustomersTable extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->foreignId('company_id');
             $table->string('mc_number');
             $table->string('dot_number');
             $table->string('website');
             $table->boolean('invoive_factoring_approvment');
             $table->boolean('invoice_mail');
-            
-            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
+            $table->integer('personal_fax');
+            $table->integer('business_fax');
+
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

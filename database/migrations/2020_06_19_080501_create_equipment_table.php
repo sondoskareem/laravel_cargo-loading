@@ -15,7 +15,20 @@ class CreateEquipmentTable extends Migration
     {
         Schema::create('equipment', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('company_id');
+            $table->string('car_type');
+            $table->string('plate');
+            $table->string('state');
+            $table->string('make');
+            $table->string('model');
+            $table->string('color');
+            $table->string('year');
+            $table->string('service_type');
+            $table->string('vin_number');
             $table->timestamps();
+
+            $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
+
         });
     }
 
