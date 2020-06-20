@@ -4,11 +4,11 @@ namespace App\Core\DAL;
 use App\User;
 use Illuminate\Support\Facades\DB;
 
-class OrderRepository extends BaseRepository {
+class UserRepository extends BaseRepository {
 
     public function getList($conditions, $columns, $sort, $skip, $take)
     {
-        $result = Order::where('is_deleted', '=', 0)->where($conditions);
+        $result = User::where('is_deleted', '=', 0)->where($conditions);
 
         if(!is_null($columns))
             $result = $result->select($columns);
@@ -37,7 +37,7 @@ class OrderRepository extends BaseRepository {
     }
 
     public function update($id, $values){
-        $user = Order::findorFail($id);
+        $user = User::findorFail($id);
         $user = tap($user)->update($values);
         return $user;
     }

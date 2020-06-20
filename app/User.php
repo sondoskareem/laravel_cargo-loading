@@ -52,4 +52,17 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    public function employees(){
+        return $this->hasMany(Employee::class);
+    }
+
+    public function drivers(){
+        return $this->hasMany(Driver::class);
+    }
+
+    public function customers(){
+        return $this->hasMany(Customer::class);
+    }
+
 }

@@ -4,14 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Repository\UserRepository;
+
 class UserController extends Controller
 {
 
     protected $user;
-    private $OrderRepository;
+    private $UserRepository;
     public function __construct()
     {
-        $this->OrderRepository = new OrderRepository(new Order());
+        $this->UserRepository = new UserRepository(new User());
         $this->user = auth()->user();
     }
     
@@ -28,7 +30,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $this->validateRequest($request);
-        $response = $this->OrderRepository->create($request->all());
+        $response = $this->UserRepository->create($request->all());
         return Utilities::wrap( $response);
     }
 
