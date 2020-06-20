@@ -22,7 +22,7 @@ class CreateRepresentativesTable extends Migration
             $table->string('payment_email');
             $table->timestamps();
 
-            $table->foreign('factoring_id')->references('id')->on('factorings');
+            $table->foreign('factoring_id')->references('id')->on('factorings')->onDelete('cascade');
 
         });
     }

@@ -26,6 +26,7 @@ class CreateLoadsTable extends Migration
             $table->integer('number_of_stop');
             $table->string('trailer_model');
             $table->string('status');
+            $table->integer('temp');
             $table->timestamps();
 
             $table->foreign('customer_id')->references('id')->on('users')->onDelete('cascade');

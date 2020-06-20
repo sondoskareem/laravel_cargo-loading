@@ -15,15 +15,25 @@ class CreateLoadStopsTable extends Migration
     {
         Schema::create('load_stops', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_id');
-            $table->string('car_type');
+            $table->foreignId('load_id');
+            $table->string('load_type');//stop1 pick up ,delivery
+            $table->string('stop_description');//pick up hash
+            $table->string('trailer_type'); //stop2 live load , drop trailer
+            $table->string('facility');
+            $table->string('address');
+            $table->string('contact');
+            $table->string('phone');
+            $table->string('appointment_type');
+            $table->text('driver_work');
+            $table->text('facility_note');
+            $table->foreign('load_id')->references('id')->on('loads')->onDelete('cascade');
+
             $table->timestamps();
-            $table->foreign('factoring_id')->references('id')->on('factorings');
 
         });
     }
 
-    /**
+/**
      * Reverse the migrations.
      *
      * @return void
