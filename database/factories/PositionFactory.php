@@ -25,5 +25,7 @@ $factory->define(Position::class, function (Faker $faker) {
         'description' => $faker->word,
         'target' => $faker->randomElement($array = array('driver' , 'employee')),
         'company_id' =>$company_id->id,
+        'is_deleted'=>false
+
     ];
 });

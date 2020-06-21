@@ -31,5 +31,7 @@ $factory->define(Customer::class, function (Faker $faker) {
         'personal_fax' => $faker->randomDigit,
         'business_fax' => $faker->randomDigit,
         'user_id'=>$user_id->id,
+        'is_deleted'=>false
+
     ];
 });

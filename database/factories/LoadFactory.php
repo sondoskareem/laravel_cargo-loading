@@ -36,5 +36,7 @@ $factory->define(Load::class, function (Faker $faker) {
         'trailer_model' => 'Big Trailer',
         'status' => 'binding',
         'temp' => $faker->randomDigit,
+        'is_deleted'=>false
+
     ];
 });

@@ -18,8 +18,8 @@ class CreateEmployeesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('position_id');
             $table->unsignedBigInteger('company_id');
-            $table->date('birth');
-            $table->integer('paye_rate_per_hour');
+            $table->string('birth');
+            $table->integer('pay_rate_per_hour');
             $table->string('education');
             $table->boolean('is_deleted')->default(false);
 

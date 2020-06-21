@@ -25,5 +25,6 @@ $factory->define(Company::class, function (Faker $faker) {
         'first_address' => $faker->address,
         'second_address' => $faker->address,
         'email' => $faker->unique()->safeEmail,
+        'is_deleted'=>false
     ];
 });

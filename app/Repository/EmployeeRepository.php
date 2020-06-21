@@ -2,17 +2,17 @@
 namespace App\Repository;
 
 use App\User;
-use App\Customer;
+use App\Employee;
 use Illuminate\Support\Facades\DB;
-// use App\Helper\Utilities;
+use App\Helper\Utilities;
 
 use Illuminate\Support\Arr;
 
-class CustomerRepository extends BaseRepository {
+class EmployeeRepository extends BaseRepository {
 
     public function getList($conditions, $columns, $sort, $skip, $take)
     {
-        $result = Customer::where('is_deleted', '=', 0)->where($conditions);
+        $result = Employee::where('is_deleted', '=', 0)->where($conditions);
 
         if(!is_null($columns))
             $result = $result->select($columns);
@@ -29,11 +29,11 @@ class CustomerRepository extends BaseRepository {
     }
 
     public function getById($id){
-        $customer = Customer::findorFail($id);
-        $user = $customer->user()->get();
-        $finalCustomer = Arr::flatten(Arr::prepend(array($customer),array($user)));
+        $employee = Employee::findorFail($id);
+        $user = $employee->user()->get();
+        $finalEmployee = Arr::flatten(Arr::prepend(array($employee),array($user)));
 
-        return $finalCustomer;
+        return $finalEmployee;
     }
 
     public function create($data){
@@ -51,18 +51,16 @@ class CustomerRepository extends BaseRepository {
             'note'=>$data['note'],
         ]);
         if($user){
-            $customer = $user->customers()->create([
-                'mc_number' =>$data['mc_number'],
-                'dot_number' =>$data['dot_number'],
-                'website' =>$data['website'],
-                'invoive_factoring_approvment' =>$data['invoive_factoring_approvment'],
-                'invoice_mail' =>$data['invoice_mail'],
-                'personal_fax' =>$data['personal_fax'],
-                'business_fax' =>$data['business_fax'],
+            $employee = $user->employees()->create([
+                'position_id' =>$data['position_id'],
+                'company_id' =>$data['company_id'],
+                'birth' =>$data['birth'],
+                'pay_rate_per_hour' =>$data['pay_rate_per_hour'],
+                'education' =>$data['education'],
             ]);
         }
        
-        return Arr::flatten(Arr::prepend(array($customer),array($user)));
+        return Arr::flatten(Arr::prepend(array($employee),array($user)));
     }
 
     public function update($id, $values){

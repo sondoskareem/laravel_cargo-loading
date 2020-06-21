@@ -31,7 +31,9 @@ $factory->define(Employee::class, function (Faker $faker) {
         'company_id' =>$Company_id->id,
         'user_id'=>$user_id->id,
         'birth' => $faker->dateTime($max = 'now', $timezone = null),
-        'paye_rate_per_hour' => $faker->randomDigit,
+        'pay_rate_per_hour' => $faker->randomDigit,
         'education' => 'B.degree',
+        'is_deleted'=>false
+
     ];
 });

@@ -42,5 +42,7 @@ $factory->define(Driver::class, function (Faker $faker) {
         'dl_exp' => $faker->dateTime($max = 'now', $timezone = null),
         'medical_exp' => $faker->dateTime($max = 'now', $timezone = null),
         'pay_rate' => $faker->randomDigit,
+        'is_deleted'=>false
+
     ];
 });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Customer;
 use App\Helper\Utilities;
 use App\Repository\CustomerRepository;
 
@@ -12,11 +13,11 @@ class CustomerController extends Controller
     private $CustomerRepository;
     public function __construct()
     {
-        $this->CustomerRepository = new CustomerRepository(new User());
+        $this->CustomerRepository = new CustomerRepository(new Customer());
         // $this->user = auth()->user();
     }
     
-    public function index()
+    public function index(Request $request)
     {
             //Validation
             $request->validate([

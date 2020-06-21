@@ -25,3 +25,8 @@ Route::post('auth/me', 'AuthController@me');
 
 Route::post('customers' , 'CustomerController@store');
 Route::post('customers/{id}' , 'CustomerController@show');
+Route::post('all/customers' , 'CustomerController@index');
+
+Route::post('employees' , 'EmployeeController@store');
+Route::post('employees/{id}' , 'EmployeeController@show');
+Route::post('all/employees' , 'EmployeeController@index');
