@@ -14,7 +14,7 @@ class Customer extends Model
         'invoive_factoring_approvment',
         'invoice_mail',
         'personal_fax',
-        'business_fax ',
+        'business_fax',
     ];
   
 

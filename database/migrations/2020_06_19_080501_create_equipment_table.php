@@ -25,6 +25,7 @@ class CreateEquipmentTable extends Migration
             $table->string('year');
             $table->string('service_type');
             $table->string('vin_number');
+            $table->boolean('is_deleted')->default(false);
             $table->timestamps();
 
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-use App\Helpers\Utilities;
+use App\Helper\Utilities;
 use App\Repository\CustomerRepository;
 
 class CustomerController extends Controller
@@ -32,7 +32,7 @@ class CustomerController extends Controller
             $take = $request->take;
     
             //Processing
-            $response = $this->UserRepository->getList($conditions, $columns, $sort, $skip, $take);
+            $response = $this->CustomerRepository->getList($conditions, $columns, $sort, $skip, $take);
     
             // Response
             return Utilities::wrap($response);
@@ -44,14 +44,14 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         $this->validateRequest($request);
-        $response = $this->UserRepository->create($request->all());
-        return Utilities::wrap( $response);
+        $response = $this->CustomerRepository->create($request->all());
+        return Utilities::wrap($response);
     }
 
     
     public function show($id)
     {
-        $response = $this->UserRepository->getById($id);
+        $response = $this->CustomerRepository->getById($id);
         return Utilities::wrap($response);
     }
 
@@ -71,14 +71,14 @@ class CustomerController extends Controller
 
         return $this->validate($request,[
             'name' => $options.'required',
-            'email' => 'integer|email',
-            'personal_phone' => $options.'required|Digits',
-            'business_phone' => $options.'required|Digits',
+            'email' => 'required|email',
+            'personal_phone' => $options.'required|integer',
+            'business_phone' => $options.'required|integer',
             // 'password' => $options.'required|string',
             // 'type' => $options.'required|json',
             'address' => $options.'required|string',
             'date' => $options.'required|string',
-            // 'status' => $options.'required|json',
+            'status' => $options.'required|string',
             'note' => $options.'required|string',
             'mc_number' => $options.'required|string',
             'dot_number' => $options.'required|string',

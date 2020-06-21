@@ -21,6 +21,7 @@ class CreateCompaniesTable extends Migration
             $table->string('first_address');
             $table->string('second_address');
             $table->integer('fax');
+            $table->boolean('is_deleted')->default(false);
             $table->timestamps();
         });
     }

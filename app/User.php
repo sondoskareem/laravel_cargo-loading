@@ -20,6 +20,7 @@ class User extends Authenticatable implements JWTSubject
         'date',
         'note',
         'type',
+        'status',
     ];
     /**
      * The attributes that are mass assignable.

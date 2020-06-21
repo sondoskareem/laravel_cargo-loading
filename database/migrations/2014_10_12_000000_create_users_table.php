@@ -20,10 +20,11 @@ class CreateUsersTable extends Migration
             $table->string('personal_phone')->unique();
             $table->string('business_phone');
             $table->string('password');
-            $table->integer('type');
+            $table->string('type');
             $table->string('address');
             $table->string('date');
-            $table->string('status')->boolean();
+            $table->string('status');
+            $table->boolean('is_deleted')->default(false);
             $table->text('note')->nullable();
             $table->timestamps();
         });

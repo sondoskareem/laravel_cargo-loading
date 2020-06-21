@@ -24,3 +24,4 @@ Route::post('auth/refresh', 'AuthController@refresh');
 Route::post('auth/me', 'AuthController@me');
 
 Route::post('customers' , 'CustomerController@store');
+Route::post('customers/{id}' , 'CustomerController@show');

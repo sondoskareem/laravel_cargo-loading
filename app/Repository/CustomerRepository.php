@@ -2,13 +2,17 @@
 namespace App\Repository;
 
 use App\User;
+use App\Customer;
 use Illuminate\Support\Facades\DB;
+use App\Helpers\Utilities;
+
+use Illuminate\Support\Arr;
 
 class CustomerRepository extends BaseRepository {
 
     public function getList($conditions, $columns, $sort, $skip, $take)
     {
-        $result = User::where('is_deleted', '=', 0)->where($conditions);
+        $result = Customers::where('is_deleted', '=', 0)->where($conditions);
 
         if(!is_null($columns))
             $result = $result->select($columns);
@@ -25,12 +29,40 @@ class CustomerRepository extends BaseRepository {
     }
 
     public function getById($id){
-        return User::findorFail($id);
+        $customer = Customer::findorFail($id);
+        $user = $customer->user()->get();
+        $finalCustomer = Arr::flatten(Arr::prepend(array($customer),array($user)));
+
+        return $finalCustomer;
     }
 
     public function create($data){
 
-        return $data;
+        $user = User::create([
+            'name' =>$data['name'],
+            'email'=>$data['email'],
+            'status'=>$data['status'],
+            'personal_phone'=>$data['personal_phone'],
+            'business_phone'=>$data['business_phone'],
+            'address'=>$data['address'],
+            'date'=>$data['date'],
+            'password'=>bcrypt('password'),
+            'type'=>'customer',
+            'note'=>$data['note'],
+        ]);
+        if($user){
+            $customer = $user->customers()->create([
+                'mc_number' =>$data['mc_number'],
+                'dot_number' =>$data['dot_number'],
+                'website' =>$data['website'],
+                'invoive_factoring_approvment' =>$data['invoive_factoring_approvment'],
+                'invoice_mail' =>$data['invoice_mail'],
+                'personal_fax' =>$data['personal_fax'],
+                'business_fax' =>$data['business_fax'],
+            ]);
+        }
+       
+        return $customer;
     }
 
     public function update($id, $values){

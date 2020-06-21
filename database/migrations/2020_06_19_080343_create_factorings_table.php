@@ -25,6 +25,7 @@ class CreateFactoringsTable extends Migration
             $table->integer('reserve_ammount');
             $table->integer('escrow_fee');
             $table->integer('monthly_minimum');
+            $table->boolean('is_deleted')->default(false);
             $table->timestamps();
 
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
