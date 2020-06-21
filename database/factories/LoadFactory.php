@@ -19,12 +19,12 @@ use Illuminate\Support\Str;
 
 $factory->define(User::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
-        'business_phone' => $faker->phoneNumber,
-        'personal_phone' => $faker->phoneNumber,
-        'status' => true,
-        'type' => $faker->randomElement([true , false]),
-        'address' => $faker->address,
+        'customer_id' => $faker->name,
+        'employee_id' => $faker->phoneNumber,
+        'po_load' => $faker->phoneNumber,
+        'load_rate' => true,
+        'loaded_mile' => $faker->randomElement([true , false]),
+        'load_type' => $faker->address,
         'sequense' => $faker->randomDigit,
         'note' => $faker->sentence,
         'email' => $faker->unique()->safeEmail,

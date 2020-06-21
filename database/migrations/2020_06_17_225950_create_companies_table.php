@@ -20,7 +20,7 @@ class CreateCompaniesTable extends Migration
             $table->string('email');
             $table->string('first_address');
             $table->string('second_address');
-            $table->string('fax');
+            $table->integer('fax');
             $table->timestamps();
         });
     }

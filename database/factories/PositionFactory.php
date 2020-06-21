@@ -2,7 +2,9 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
+use App\Position;
 use App\User;
+use App\Company;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
@@ -17,17 +19,11 @@ use Illuminate\Support\Str;
 |
 */
 
-$factory->define(User::class, function (Faker $faker) {
+$factory->define(Position::class, function (Faker $faker) {
+    $company_id = factory(Company::class , 1)->create()->first();
     return [
-        'name' => $faker->name,
-        'business_phone' => $faker->phoneNumber,
-        'personal_phone' => $faker->phoneNumber,
-        'status' => true,
-        'type' => $faker->randomElement([true , false]),
-        'address' => $faker->address,
-        'sequense' => $faker->randomDigit,
-        'note' => $faker->sentence,
-        'email' => $faker->unique()->safeEmail,
-        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        'description' => $faker->word,
+        'target' => $faker->randomElement($array = array('driver' , 'employee')),
+        'company_id' =>$company_id->id,
     ];
 });

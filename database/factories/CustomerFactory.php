@@ -2,7 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
+use App\Customer;
 use App\User;
+use App\Employee;
+use App\Driver;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
@@ -17,13 +20,16 @@ use Illuminate\Support\Str;
 |
 */
 
-$factory->define(User::class, function (Faker $faker) {
+$factory->define(Customer::class, function (Faker $faker) {
+    $user_id=factory(User::class , 1)->create()->first();
     return [
-        'name' => $faker->name,
-        'email' => $faker->email,
-        'phone' => $faker->phoneNumber,
-        'status' => false,
-        'email' => $faker->unique()->safeEmail,
-        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        'mc_number' => $faker->randomDigit,
+        'dot_number' => $faker->randomDigit,
+        'website' => 'www.anything.com',
+        'invoive_factoring_approvment' => true,
+        'invoice_mail' => true,
+        'personal_fax' => $faker->randomDigit,
+        'business_fax' => $faker->randomDigit,
+        'user_id'=>$user_id->id,
     ];
 });
