@@ -21,6 +21,7 @@ class CreateDriversTable extends Migration
             $table->date('birth');
             $table->string('home_terminal');
             $table->string('dl_hash');
+            $table->string('state');
             $table->string('endorsements');
             $table->boolean('hazmat');
             $table->boolean('tanker');

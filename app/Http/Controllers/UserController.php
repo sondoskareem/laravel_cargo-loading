@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Repository\UserRepository;
+// use App\Middleware\Authenticate;
 
 class UserController extends Controller
 {
@@ -19,13 +20,28 @@ class UserController extends Controller
     
     public function index()
     {
-        return \response()->json(['users' => User::all()]);
+            //Validation
+            $request->validate([
+                'skip' => 'Integer',
+                'take' => 'required|Integer'
+            ]);
+    
+            //Param
+            $conditions = json_decode($request->filter, true);
+            $columns = json_decode($request->columns, true);
+            $sort = json_decode($request->sort);
+            $skip = $request->skip;
+            $take = $request->take;
+    
+            //Processing
+            $response = $this->UserRepository->getList($conditions, $columns, $sort, $skip, $take);
+    
+            // Response
+            return Utilities::wrap($response);
     }
 
     
-    public function create()
-    {
-    }
+    
 
     public function store(Request $request)
     {
@@ -37,12 +53,11 @@ class UserController extends Controller
     
     public function show($id)
     {
+        $response = $this->UserRepository->getById($id);
+        return Utilities::wrap($response);
     }
 
    
-    public function edit($id)
-    {
-    }
 
     
     public function update(Request $request, $id)

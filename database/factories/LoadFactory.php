@@ -3,6 +3,9 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\User;
+use App\Customer;
+use App\Employee;
+use App\Load;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
@@ -17,17 +20,21 @@ use Illuminate\Support\Str;
 |
 */
 
-$factory->define(User::class, function (Faker $faker) {
+$factory->define(Load::class, function (Faker $faker) {
+    $employee = Employee::first();
+    $customer = Customer::first();
     return [
-        'customer_id' => $faker->name,
-        'employee_id' => $faker->phoneNumber,
-        'po_load' => $faker->phoneNumber,
-        'load_rate' => true,
-        'loaded_mile' => $faker->randomElement([true , false]),
-        'load_type' => $faker->address,
-        'sequense' => $faker->randomDigit,
-        'note' => $faker->sentence,
-        'email' => $faker->unique()->safeEmail,
-        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        'customer_id' => $employee->id,
+        'employee_id' => $customer->id,
+        'po_load' => $faker->word,
+        'load_rate' => $faker->word,
+        'loaded_mile' => $faker->randomDigit,
+        'load_type' => $faker->word,
+        'trailer_type' => $faker->word,
+        'Endorsements' => $faker->boolean,
+        'number_of_stop' => 1,
+        'trailer_model' => 'Big Trailer',
+        'status' => 'binding',
+        'temp' => $faker->randomDigit,
     ];
 });

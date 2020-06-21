@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
         $CustomerQuentity = 1;
         $EmployeeQuentity = 1;
         $DriverQuentity = 1;
-        $LoadQuentity = 10;
+        $LoadQuentity = 2;
 
         // factory(User::class , $userQuentity)->create();
         factory(Company::class , $CompanyQuentity)->create();
@@ -41,6 +41,6 @@ class DatabaseSeeder extends Seeder
         factory(Employee::class , $EmployeeQuentity)->create();
         factory(Customer::class , $CustomerQuentity)->create();
         factory(Driver::class , $DriverQuentity)->create();
-        // factory(Load::class , $LoadQuentity)->create();
+        factory(Load::class , $LoadQuentity)->create();
     }
 }

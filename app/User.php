@@ -10,15 +10,22 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
-
+    protected $fillable = [
+        'name',
+        'email',
+        'personal_phone',
+        'business_phone',
+        'password',
+        'address',
+        'note',
+        'type',
+    ];
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
+    
 
     /**
      * The attributes that should be hidden for arrays.
