@@ -72,12 +72,16 @@ class UserController extends Controller
     private function validateRequest( $request, $options = ''  ){
 
         return $this->validate($request,[
-            'status' => $options.'required|integer',
-            'driver_id' => 'integer|nullable',
-            'items' => $options.'required|json',
-            'details' => $options.'required|json',
-            'provider' => $options.'required|json',
-            'customer' => $options.'required|json',
+            'name' => $options.'required',
+            'email' => 'integer|email',
+            'personal_phone' => $options.'required|Digits',
+            'business_phone' => $options.'required|Digits',
+            // 'password' => $options.'required|string',
+            // 'type' => $options.'required|json',
+            'address' => $options.'required|string',
+            'date' => $options.'required|string',
+            // 'status' => $options.'required|json',
+            'note' => $options.'required|string',
         ]);
     }
 }

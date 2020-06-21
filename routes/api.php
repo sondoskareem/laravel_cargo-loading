@@ -23,4 +23,4 @@ Route::post('/auth/logout', 'AuthController@logout');
 Route::post('auth/refresh', 'AuthController@refresh');
 Route::post('auth/me', 'AuthController@me');
 
-// Route::Resours('users' , 'UserController');
+Route::post('customers' , 'CustomerController@store');

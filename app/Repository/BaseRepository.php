@@ -1,7 +1,8 @@
 <?php
-namespace App\Core\DAL;
+namespace App\Repository;
 
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 
 abstract class BaseRepository {
     public $table;

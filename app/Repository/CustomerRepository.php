@@ -1,10 +1,10 @@
 <?php
-namespace App\Core\DAL;
+namespace App\Repository;
 
 use App\User;
 use Illuminate\Support\Facades\DB;
 
-class UserRepository extends BaseRepository {
+class CustomerRepository extends BaseRepository {
 
     public function getList($conditions, $columns, $sort, $skip, $take)
     {
@@ -29,11 +29,8 @@ class UserRepository extends BaseRepository {
     }
 
     public function create($data){
-        if (User::create($data))
-            return true;
-        else {
-            return null;
-        }
+
+        return $data;
     }
 
     public function update($id, $values){
