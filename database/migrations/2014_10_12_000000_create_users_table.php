@@ -23,7 +23,6 @@ class CreateUsersTable extends Migration
             $table->integer('type');
             $table->string('address');
             $table->string('date');
-            $table->increments('sequense')->nullable();
             $table->string('status')->boolean();
             $table->text('note')->nullable();
             $table->timestamps();
