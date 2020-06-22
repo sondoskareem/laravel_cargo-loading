@@ -34,3 +34,7 @@ Route::post('all/employees' , 'EmployeeController@index');
 Route::post('drivers' , 'DriverController@store');
 Route::post('drivers/{id}' , 'DriverController@show');
 Route::post('all/drivers' , 'DriverController@index');
+
+Route::post('loads' , 'LoadController@store');
+Route::post('loads/{id}' , 'LoadController@show');
+Route::post('all/loads' , 'LoadController@index');

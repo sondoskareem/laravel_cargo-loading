@@ -18,15 +18,14 @@ class CreateLoadsTable extends Migration
             $table->unsignedBigInteger('customer_id');
             $table->unsignedBigInteger('employee_id');
             $table->string('po_load');
-            $table->string('load_rate');
+            $table->integer('load_rate');
             $table->integer('loaded_mile');
             $table->string('load_type');
             $table->string('trailer_type');
-            $table->boolean('Endorsements');
+            $table->boolean('endorsements');
             $table->integer('number_of_stop');
             $table->string('trailer_model');
             $table->string('status');
-            $table->integer('temp');
             $table->boolean('is_deleted')->default(false);
             $table->timestamps();
 

@@ -31,7 +31,7 @@ $factory->define(Load::class, function (Faker $faker) {
         'loaded_mile' => $faker->randomDigit,
         'load_type' => $faker->word,
         'trailer_type' => $faker->word,
-        'Endorsements' => $faker->boolean,
+        'endorsements' => $faker->boolean,
         'number_of_stop' => 1,
         'trailer_model' => 'Big Trailer',
         'status' => 'binding',

@@ -14,7 +14,7 @@ class Load extends Model
         'loaded_mile',
         'load_type',
         'trailer_type',
-        'Endorsements',
+        'endorsements',
         'number_of_stop',
         'trailer_model',
         'status',
