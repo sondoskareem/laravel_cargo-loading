@@ -11,7 +11,9 @@ class Driver extends Model
         'company_id',
         'position_id',
         'birth',
+        'home_terminal',
         'dl_hash',
+        'state',
         'endorsements',
         'hazmat',
         'tanker',
@@ -19,6 +21,7 @@ class Driver extends Model
         'dl_exp',
         'medical_exp',
         'pay_rate',
+        'profile_image',
     ];
     public function user(){
         return $this->belongsTo(User::class);

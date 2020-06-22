@@ -33,7 +33,8 @@ $factory->define(Employee::class, function (Faker $faker) {
         'birth' => $faker->dateTime($max = 'now', $timezone = null),
         'pay_rate_per_hour' => $faker->randomDigit,
         'education' => 'B.degree',
-        'is_deleted'=>false
+        'is_deleted'=>false,
+        'profile_image'=>"/uploads/images/any_1592849855.jpg"
 
     ];
 });

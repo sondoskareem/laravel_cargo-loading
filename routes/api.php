@@ -30,3 +30,7 @@ Route::post('all/customers' , 'CustomerController@index');
 Route::post('employees' , 'EmployeeController@store');
 Route::post('employees/{id}' , 'EmployeeController@show');
 Route::post('all/employees' , 'EmployeeController@index');
+
+Route::post('drivers' , 'DriverController@store');
+Route::post('drivers/{id}' , 'DriverController@show');
+Route::post('all/drivers' , 'DriverController@index');

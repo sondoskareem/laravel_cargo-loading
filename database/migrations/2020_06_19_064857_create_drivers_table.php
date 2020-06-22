@@ -18,7 +18,7 @@ class CreateDriversTable extends Migration
             $table->foreignId('user_id');
             $table->foreignId('company_id');
             $table->unsignedBigInteger('position_id');
-            $table->date('birth');
+            $table->string('birth');
             $table->string('home_terminal');
             $table->string('dl_hash');
             $table->string('state');
@@ -26,10 +26,11 @@ class CreateDriversTable extends Migration
             $table->boolean('hazmat');
             $table->boolean('tanker');
             $table->boolean('double_triple');
-            $table->date('dl_exp');
-            $table->date('medical_exp');
+            $table->string('dl_exp');
+            $table->string('medical_exp');
             $table->integer('pay_rate');
             $table->boolean('is_deleted')->default(false);
+            $table->string('profile_image');
 
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

@@ -22,6 +22,7 @@ class CreateEmployeesTable extends Migration
             $table->integer('pay_rate_per_hour');
             $table->string('education');
             $table->boolean('is_deleted')->default(false);
+            $table->string('profile_image');
 
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

@@ -14,6 +14,7 @@ class Employee extends Model
         'birth',
         'pay_rate_per_hour',
         'education',
+        'profile_image'
     ];
 
     public function user(){
