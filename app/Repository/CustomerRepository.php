@@ -66,9 +66,9 @@ class CustomerRepository extends BaseRepository {
     }
 
     public function update($id, $values){
-        $user = User::findorFail($id);
-        $user = tap($user)->update($values);
-        return $user;
+        $custmer = Customer::findorFail($id);
+        $custmer = tap($custmer)->update($values);
+        return $custmer;
     }
     
     

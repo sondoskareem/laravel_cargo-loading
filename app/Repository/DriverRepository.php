@@ -59,7 +59,7 @@ class DriverRepository extends BaseRepository {
                 'address'=>$data['address'],
                 'date'=>$data['date'],
                 'password'=>bcrypt('password'),
-                'type'=>'customer',
+                'type'=>'driver',
                 'note'=>$data['note'],
             ]);
             if($user){
@@ -90,9 +90,9 @@ class DriverRepository extends BaseRepository {
     }
 
     public function update($id, $values){
-        $user = User::findorFail($id);
-        $user = tap($user)->update($values);
-        return $user;
+        $driver = Driver::findorFail($id);
+        $driver = tap($driver)->update($values);
+        return $driver;
     }
     
     

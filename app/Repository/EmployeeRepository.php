@@ -8,6 +8,7 @@ use App\Helper\Utilities;
 use Validator,Redirect,Response,File;
 use Illuminate\Support\Arr;
 use App\Traits\UploadTrait;
+use Illuminate\Http\Request;
 use Str;
 class EmployeeRepository extends BaseRepository {
     use UploadTrait;
@@ -38,7 +39,7 @@ class EmployeeRepository extends BaseRepository {
         return $finalEmployee;
     }
 
-    public function create($data){
+    public function createOrupdate($data ,$id = null, $method){
 
         if ($data->hasFile('profile_image')) {
             $image = $data->file('profile_image');
@@ -47,7 +48,15 @@ class EmployeeRepository extends BaseRepository {
             $filePath = $folder . $name. '.' . $image->getClientOriginalExtension();
             $this->uploadOne($image, $folder, 'public', $name);
 
-        $user = User::create([
+            if($method == 'create'){
+            $user = new User();
+            $employee = new Employee();
+            }else {
+            $employee= Employee::findorFail($id);
+            $user = $employee->user();
+            }
+
+        $user = $user->$method([
             'name' =>$data['name'],
             'email'=>$data['email'],
             'status'=>$data['status'],
@@ -55,12 +64,10 @@ class EmployeeRepository extends BaseRepository {
             'business_phone'=>$data['business_phone'],
             'address'=>$data['address'],
             'date'=>$data['date'],
-            'password'=>bcrypt('password'),
-            'type'=>'customer',
+            'type'=>'employee',
             'note'=>$data['note'],
         ]);
-        if($user){
-            $employee = $user->employees()->create([
+            $employee = $employee->$method([
                 'position_id' =>$data['position_id'],
                 'company_id' =>$data['company_id'],
                 'birth' =>$data['birth'],
@@ -68,15 +75,48 @@ class EmployeeRepository extends BaseRepository {
                 'education' =>$data['education'],
                 'profile_image' =>$filePath,
             ]);
-        }
-        return Arr::flatten(Arr::prepend(array($employee),array($user)));
+
+        return true ;
     }
     }
 
-    public function update($id, $values){
-        $user = User::findorFail($id);
-        $user = tap($user)->update($values);
-        return $user;
+    public function update($employee, $values){
+        $user = $employee->user()->get();
+
+        $values['name'] ?: $values['name'] = $user->first()->name;
+        $values['email'] ?: $values['email'] = $user->first()->email;
+        $values['status'] ?: $values['status'] = $user->first()->status;
+        $values['personal_phone'] ?: $values['personal_phone'] = $user->first()->personal_phone;
+        $values['business_phone'] ?: $values['business_phone'] = $user->first()->business_phone;
+        $values['address'] ?: $values['address'] = $user->first()->address;
+        $values['date'] ?: $values['date'] = $user->first()->date;
+        $values['note'] ?: $values['note'] = $user->first()->note;
+
+        $values['position_id'] ?: $values['position_id'] = $employee->position_id;
+        $values['company_id'] ?: $values['company_id'] = $employee->company_id;
+        $values['birth'] ?: $values['birth'] = $employee->birth;
+        $values['pay_rate_per_hour'] ?: $values['pay_rate_per_hour'] = $employee->pay_rate_per_hour;
+        $values['education'] ?: $values['education'] = $employee->education;
+
+        $employee = tap($employee)->update([
+            'position_id' => $values['position_id'],
+            'company_id' => $values['company_id'] ,
+            'birth' => $values['birth'] ,
+            'pay_rate_per_hour' => $values['pay_rate_per_hour'],
+            'education' => $values['education'] 
+        ]);
+
+        $user = tap($user->first())->update([
+            'name' => $values['name'],
+            'email' => $values['email'] ,
+            'status' => $values['status'] ,
+            'personal_phone' => $values['personal_phone'],
+            'business_phone' => $values['business_phone'] ,
+            'address' => $values['address'] ,
+            'date' => $values['date'] ,
+            'note' => $values['note'] ,
+        ]);
+        return true;
     }
     
     

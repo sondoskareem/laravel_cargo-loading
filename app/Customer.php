@@ -17,6 +17,16 @@ class Customer extends Model
         'business_fax',
     ];
   
+    // protected static function boot()
+    // {
+    //     parent::boot();
+
+    //     // auto-sets values on creation
+    //     static::creating(function ($query) {
+    //         $query->type = 'customer';
+    //         $query->password = bcrypt('password');
+    //     });
+    // }
 
     public function user(){
         return $this->belongsTo(User::class);

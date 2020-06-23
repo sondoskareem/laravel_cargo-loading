@@ -13,7 +13,8 @@ class DriverController extends Controller
     public function __construct()
     {
         $this->DriverRepository = new DriverRepository(new Driver());
-        // $this->user = auth()->user();
+        $this->middleware('auth:api');
+        $this->user = auth('api')->user();
     }
     
     public function index(Request $request)
@@ -60,18 +61,29 @@ class DriverController extends Controller
     
     public function update(Request $request, $id)
     {
+        $this->validateRequest($request,'sometimes|');
+        $response = $this->DriverRepository->update($id , $request->all());
+        return Utilities::wrap($response);
     }
 
-    
+    public function updateStatus(Request $request , $id)
+    {
+        request()->validate(['status' => 'required|string']);
+        $response = $this->DriverRepository->update($id ,array('status' => $request->status));
+        return Utilities::wrap($response);
+    }
+
     public function destroy($id)
     {
+        $response = $this->DriverRepository->update($id ,array('is_deleted' => 1));
+        return Utilities::wrap($response);
     }
 
     private function validateRequest( $request, $options = ''  ){
 
         return $this->validate($request,[
-            'name' => $options.'required',
-            'email' => 'required|email',
+            'name' => $options.'required|string|unique:users',
+            'email' => 'required|email|max:255|unique:users',
             'personal_phone' => $options.'required|integer',
             'business_phone' => $options.'required|integer',
             'address' => $options.'required|string',

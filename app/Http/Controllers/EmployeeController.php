@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Repository\EmployeeRepository;
 use App\Employee;
 use App\Helper\Utilities;
+use Illuminate\Support\Facades\Gate;
 
 class EmployeeController extends Controller
 {
@@ -14,11 +15,14 @@ class EmployeeController extends Controller
     public function __construct()
     {
         $this->EmployeeRepository = new EmployeeRepository(new Employee());
-        // $this->user = auth()->user();
+        $this->middleware('auth:api');
+        $this->user = auth('api')->user();
+
     }
     
     public function index(Request $request)
     {
+
             //Validation
             $request->validate([
                 'skip' => 'Integer',
@@ -37,43 +41,53 @@ class EmployeeController extends Controller
     
             // Response
             return Utilities::wrap($response);
-    }
 
-    
-    
+    }
 
     public function store(Request $request)
     {
         $this->validateRequest($request);
-        $response = $this->EmployeeRepository->create($request);
+        $response = $this->EmployeeRepository->createOrupdate($request , 'create');
         return Utilities::wrap($response);
        
     }
-
     
     public function show($id)
     {
+        //  (Gate::authorize('allow_admin', $this->user))
+
         $response = $this->EmployeeRepository->getById($id);
         return Utilities::wrap($response);
     }
 
-   
-
-    
-    public function update(Request $request, $id)
+    public function update(Request $request,Employee $id)
     {
+        $this->validateRequest($request,'sometimes|');
+        $response = $this->EmployeeRepository->update( $id  ,$request);
+        return Utilities::wrap($response);
+        // return Utilities::wrap($request->all());
     }
 
-    
+    public function updateStatus(Request $request , Employee $id)
+    {
+        request()->validate(['status' => 'required|string']);
+        $response = $this->EmployeeRepository->update($id ,array('status' => $request->status));
+        return Utilities::wrap($response);
+    }
+
     public function destroy($id)
     {
+        $response = $this->EmployeeRepository->createOrupdate($id ,array('is_deleted' => 1));
+        return Utilities::wrap($response);
     }
 
     private function validateRequest( $request, $options = ''  ){
 
         return $this->validate($request,[
-            'name' => $options.'required',
-            'email' => 'required|email',
+            'name' => $options.'required|string|unique:users',
+            // 'name' => $options."required|string|unique:users , name , {{$this->user->id}}", 
+            'email' => "email|unique:users,email , {$this->user->id}", 
+        //    'email' => $options.'required|email|unique:users',
             'personal_phone' => $options.'required|integer',
             'business_phone' => $options.'required|integer',
             'address' => $options.'required|string',
@@ -84,7 +98,7 @@ class EmployeeController extends Controller
             'company_id' => $options.'required|exists:companies,id',
             'birth' => $options.'required|string',
             'pay_rate_per_hour' => $options.'required|string',
-            'profile_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'profile_image' => $options.'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'education' => $options.'required|string',
         ]);
     }

@@ -35,7 +35,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'id'
     ];
 
     /**
@@ -52,6 +52,10 @@ class User extends Authenticatable implements JWTSubject
         return $this->getKey();
     }
 
+    public function setUserTypeAttribute($value)
+    { 
+        $this->attributes['password'] = empty($value) ? bcrypt('password') : $value;
+    }
     /**
      * Return a key value array, containing any custom claims to be added to the JWT.
      *
@@ -63,15 +67,15 @@ class User extends Authenticatable implements JWTSubject
     }
 
     public function employees(){
-        return $this->hasMany(Employee::class);
+        return $this->hasOne(Employee::class);
     }
 
     public function drivers(){
-        return $this->hasMany(Driver::class);
+        return $this->hasOne(Driver::class);
     }
 
     public function customers(){
-        return $this->hasMany(Customer::class);
+        return $this->hasOne(Customer::class);
     }
 
 }

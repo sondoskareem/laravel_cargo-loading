@@ -57,9 +57,9 @@ class LoadRepository extends BaseRepository {
     }
 
     public function update($id, $values){
-        $user = User::findorFail($id);
-        $user = tap($user)->update($values);
-        return $user;
+        $load = Load::findorFail($id);
+        $load = tap($load)->update($values);
+        return $load;
     }
     
     

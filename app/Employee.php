@@ -16,6 +16,20 @@ class Employee extends Model
         'education',
         'profile_image'
     ];
+    protected static function bootE()
+    {
+        parent::boot();
+
+        // auto-sets values on creation
+        static::creating(function($model){
+            $model->type = 'employee';
+        });
+    }
+
+    public function setUserTypeAttribute($value)
+    { 
+        $this->attributes['type'] = empty($value) ? 'admin' : $value;
+    }
 
     public function user(){
         return $this->belongsTo(User::class);
