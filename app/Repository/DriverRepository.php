@@ -80,13 +80,13 @@ class DriverRepository extends BaseRepository {
                     'pay_rate' =>$data['pay_rate'],
                     'profile_image' =>$filePath,
                     ]);
-            }
+        return Arr::flatten(Arr::prepend(array($driver),array($user)));
 
-        }
+            }
+        }else return Null;
+
 
        
-       //fileUpload
-        return Arr::flatten(Arr::prepend(array($driver),array($user)));
     }
 
     public function update($driver, $values){

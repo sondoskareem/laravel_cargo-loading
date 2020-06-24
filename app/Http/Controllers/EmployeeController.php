@@ -47,7 +47,7 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         $this->validateRequest($request);
-        $response = $this->EmployeeRepository->createOrupdate($request , 'create');
+        $response = $this->EmployeeRepository->create($request);
         return Utilities::wrap($response);
        
     }
@@ -95,7 +95,7 @@ class EmployeeController extends Controller
             'company_id' => $options.'required|exists:companies,id',
             'birth' => $options.'required|string',
             'pay_rate_per_hour' => $options.'required|string',
-            'profile_image' => $options.'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'profile_image' => $options.'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'education' => $options.'required|string',
         ]);
     }

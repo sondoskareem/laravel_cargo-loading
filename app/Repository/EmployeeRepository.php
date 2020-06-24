@@ -39,7 +39,7 @@ class EmployeeRepository extends BaseRepository {
         return $finalEmployee;
     }
 
-    public function createOrupdate($data ,$id = null, $method){
+    public function create($data){
 
         if ($data->hasFile('profile_image')) {
             $image = $data->file('profile_image');
@@ -48,15 +48,9 @@ class EmployeeRepository extends BaseRepository {
             $filePath = $folder . $name. '.' . $image->getClientOriginalExtension();
             $this->uploadOne($image, $folder, 'public', $name);
 
-            if($method == 'create'){
-            $user = new User();
-            $employee = new Employee();
-            }else {
-            $employee= Employee::findorFail($id);
-            $user = $employee->user();
-            }
+            
 
-        $user = $user->$method([
+        $user = User::create([
             'name' =>$data['name'],
             'email'=>$data['email'],
             'status'=>$data['status'],
@@ -67,7 +61,7 @@ class EmployeeRepository extends BaseRepository {
             'type'=>'employee',
             'note'=>$data['note'],
         ]);
-            $employee = $employee->$method([
+            $employee = $user->employees()->create([
                 'position_id' =>$data['position_id'],
                 'company_id' =>$data['company_id'],
                 'birth' =>$data['birth'],
@@ -76,8 +70,8 @@ class EmployeeRepository extends BaseRepository {
                 'profile_image' =>$filePath,
             ]);
 
-        return true ;
-    }
+            return Arr::flatten(Arr::prepend(array($employee),array($user)));
+        }else return Null;
     }
 
     public function update($employee, $values){

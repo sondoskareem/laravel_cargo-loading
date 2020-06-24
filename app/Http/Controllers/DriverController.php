@@ -98,7 +98,7 @@ class DriverController extends Controller
             'tanker' => $options.'required|boolean',
             'double_triple' => $options.'required|boolean',
             'dl_exp' => $options.'required|string',
-            'profile_image' => $options.'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'profile_image' => $options.'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'medical_exp' => $options.'required|string',
             'pay_rate' => $options.'required|integer',
         ]);
