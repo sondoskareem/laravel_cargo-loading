@@ -24,7 +24,7 @@ Route::post('auth/refresh', 'AuthController@refresh');
 Route::post('auth/me', 'AuthController@me');
 
 
-// Route::group(['middleware' => ['can:do_everything']], function () {
+Route::group(['middleware' => ['can:do_everything']], function () {
     
 Route::post('customers' , 'CustomerController@store');
 Route::post('customers/{id}' , 'CustomerController@show');
@@ -54,5 +54,5 @@ Route::post('update/loads/{id}' , 'LoadController@update');
 Route::post('update/loads/{id}/status' , 'LoadController@updateStatus');
 Route::delete('all/loads' , 'LoadController@delete');
 
-// });
+});
 
