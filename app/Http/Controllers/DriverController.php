@@ -56,13 +56,10 @@ class DriverController extends Controller
         return Utilities::wrap($response);
     }
 
-   
-
-    
-    public function update(Request $request, $id)
+    public function update(Request $request,Driver $id)
     {
         $this->validateRequest($request,'sometimes|');
-        $response = $this->DriverRepository->update($id , $request->all());
+        $response = $this->DriverRepository->update( $id  ,$request);
         return Utilities::wrap($response);
     }
 
@@ -82,8 +79,8 @@ class DriverController extends Controller
     private function validateRequest( $request, $options = ''  ){
 
         return $this->validate($request,[
-            'name' => $options.'required|string|unique:users',
-            'email' => 'required|email|max:255|unique:users',
+            'name' => $options."required|string|unique:users,name,{$this->user->id}", 
+            'email' => $options."required|email|unique:users,email,{$this->user->id}", 
             'personal_phone' => $options.'required|integer',
             'business_phone' => $options.'required|integer',
             'address' => $options.'required|string',
@@ -101,7 +98,7 @@ class DriverController extends Controller
             'tanker' => $options.'required|boolean',
             'double_triple' => $options.'required|boolean',
             'dl_exp' => $options.'required|string',
-            'profile_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'profile_image' => $options.'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'medical_exp' => $options.'required|string',
             'pay_rate' => $options.'required|integer',
         ]);

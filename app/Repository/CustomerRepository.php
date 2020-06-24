@@ -65,10 +65,47 @@ class CustomerRepository extends BaseRepository {
         return Arr::flatten(Arr::prepend(array($customer),array($user)));
     }
 
-    public function update($id, $values){
-        $custmer = Customer::findorFail($id);
-        $custmer = tap($custmer)->update($values);
-        return $custmer;
+    public function update($customer, $values){
+        $user = $customer->user()->get();
+
+        $values['name'] ?: $values['name'] = $user->first()->name;
+        $values['email'] ?: $values['email'] = $user->first()->email;
+        $values['status'] ?: $values['status'] = $user->first()->status;
+        $values['personal_phone'] ?: $values['personal_phone'] = $user->first()->personal_phone;
+        $values['business_phone'] ?: $values['business_phone'] = $user->first()->business_phone;
+        $values['address'] ?: $values['address'] = $user->first()->address;
+        $values['date'] ?: $values['date'] = $user->first()->date;
+        $values['note'] ?: $values['note'] = $user->first()->note;
+
+        $values['mc_number'] ?: $values['mc_number'] = $customer->mc_number;
+        $values['dot_number'] ?: $values['dot_number'] = $customer->dot_number;
+        $values['website'] ?: $values['website'] = $customer->website;
+        $values['invoive_factoring_approvment'] ?: $values['invoive_factoring_approvment'] = $customer->invoive_factoring_approvment;
+        $values['invoice_mail'] ?: $values['invoice_mail'] = $customer->invoice_mail;
+        $values['personal_fax'] ?: $values['personal_fax'] = $customer->personal_fax;
+        $values['business_fax'] ?: $values['business_fax'] = $customer->business_fax;
+
+        $customer = tap($customer)->update([
+            'mc_number' => $values['mc_number'],
+            'dot_number' => $values['dot_number'] ,
+            'website' => $values['website'] ,
+            'invoive_factoring_approvment' => $values['invoive_factoring_approvment'],
+            'invoice_mail' => $values['invoice_mail'] ,
+            'personal_fax' => $values['personal_fax'] ,
+            'business_fax' => $values['business_fax'] ,
+        ]);
+
+        $user = tap($user->first())->update([
+            'name' => $values['name'],
+            'email' => $values['email'] ,
+            'status' => $values['status'] ,
+            'personal_phone' => $values['personal_phone'],
+            'business_phone' => $values['business_phone'] ,
+            'address' => $values['address'] ,
+            'date' => $values['date'] ,
+            'note' => $values['note'] ,
+        ]);
+        return true;
     }
     
     

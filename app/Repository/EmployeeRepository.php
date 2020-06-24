@@ -105,7 +105,6 @@ class EmployeeRepository extends BaseRepository {
             'pay_rate_per_hour' => $values['pay_rate_per_hour'],
             'education' => $values['education'] 
         ]);
-
         $user = tap($user->first())->update([
             'name' => $values['name'],
             'email' => $values['email'] ,

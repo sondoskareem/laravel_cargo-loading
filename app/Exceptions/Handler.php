@@ -56,57 +56,57 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-        // if($exception instanceof QueryException || $exception instanceof ModelNotFoundException){
-        //     $exception = new NotFoundHttpException('Resource not found');
-        // }
+        if($exception instanceof QueryException || $exception instanceof ModelNotFoundException){
+            $exception = new NotFoundHttpException('Resource not found');
+        }
 
 
         return parent::render($request, $exception);
     }
 
-    // protected function prepareJsonResponse($request, Throwable $e)
-    // {
-    //     return response()->json([
-    //         'errors' => [
-    //             [
-    //                 'title' => Str::title(Str::snake(class_basename($e), ' ')),
-    //                 'details' => $e->getMessage(),
-    //             ]
-    //         ]
-    //     ], $this->isHttpException($e) ? $e->getStatusCode() : 500);
-    // }
+    protected function prepareJsonResponse($request, Throwable $e)
+    {
+        return response()->json([
+            'errors' => [
+                [
+                    'title' => Str::title(Str::snake(class_basename($e), ' ')),
+                    'details' => $e->getMessage(),
+                ]
+            ]
+        ], $this->isHttpException($e) ? $e->getStatusCode() : 500);
+    }
 
-    // protected function invalidJson($request, ValidationException $exception)
-    // {
-    //     $errors = ( new Collection($exception->validator->errors()) )
-    //         ->map(function ($error, $key) {
-    //             return [
-    //                 'title'   => 'Validation Error',
-    //                 'details' => $error[0],
-    //                 'source'  => [
-    //                     'pointer' => '/' . str_replace('.', '/', $key),
-    //                 ]
-    //             ];
-    //         })
-    //         ->values();
+    protected function invalidJson($request, ValidationException $exception)
+    {
+        $errors = ( new Collection($exception->validator->errors()) )
+            ->map(function ($error, $key) {
+                return [
+                    'title'   => 'Validation Error',
+                    'details' => $error[0],
+                    'source'  => [
+                        'pointer' => '/' . str_replace('.', '/', $key),
+                    ]
+                ];
+            })
+            ->values();
 
-    //     return response()->json([
-    //         'errors' => $errors
-    //     ], $exception->status);
-    // }
+        return response()->json([
+            'errors' => $errors
+        ], $exception->status);
+    }
 
-    // protected function unauthenticated($request, AuthenticationException $exception)
-    // {
-    //     if($request->expectsJson()){
-    //         return response()->json([
-    //             'errors' => [
-    //                 [
-    //                     'title' => 'Unauthenticated',
-    //                     'details' => 'You are not authenticated',
-    //                 ]
-    //             ]
-    //         ], 403);
-    //     }
-    //     return redirect()->guest($exception->redirectTo() ?? route('login'));
-    // }
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        if($request->expectsJson()){
+            return response()->json([
+                'errors' => [
+                    [
+                        'title' => 'Unauthenticated',
+                        'details' => 'You are not authenticated',
+                    ]
+                ]
+            ], 403);
+        }
+        return redirect()->guest($exception->redirectTo() ?? route('login'));
+    }
 }

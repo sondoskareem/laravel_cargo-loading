@@ -24,13 +24,13 @@ Route::post('auth/refresh', 'AuthController@refresh');
 Route::post('auth/me', 'AuthController@me');
 
 
-Route::group(['middleware' => ['can:do_everything']], function () {
+// Route::group(['middleware' => ['can:do_everything']], function () {
     
 Route::post('customers' , 'CustomerController@store');
 Route::post('customers/{id}' , 'CustomerController@show');
 Route::post('all/customers' , 'CustomerController@index');
-Route::patch('update/customers/{id}' , 'CustomerController@update');
-Route::patch('update/customers/{id}/status' , 'CustomerController@updateStatus');
+Route::post('update/customers/{id}' , 'CustomerController@update');
+Route::post('update/customers/{id}/status' , 'CustomerController@updateStatus');
 Route::delete('all/customers' , 'CustomerController@delete');
 
 Route::post('employees' , 'EmployeeController@store');
@@ -43,16 +43,16 @@ Route::delete('all/employees' , 'EmployeeController@delete');
 Route::post('drivers' , 'DriverController@store');
 Route::post('drivers/{id}' , 'DriverController@show');
 Route::post('all/drivers' , 'DriverController@index');
-Route::post('update/customers/{id}' , 'DriverController@update');
-Route::post('update/customers/{id}/status' , 'DriverController@updateStatus');
-Route::delete('all/customers' , 'DriverController@delete');
+Route::post('update/drivers/{id}' , 'DriverController@update');
+Route::post('update/drivers/{id}/status' , 'DriverController@updateStatus');
+Route::delete('all/drivers' , 'DriverController@delete');
 
 Route::post('loads' , 'LoadController@store');
 Route::post('loads/{id}' , 'LoadController@show');
 Route::post('all/loads' , 'LoadController@index');
-Route::post('update/customers/{id}' , 'LoadController@update');
-Route::post('update/customers/{id}/status' , 'LoadController@updateStatus');
-Route::delete('all/customers' , 'LoadController@delete');
+Route::post('update/loads/{id}' , 'LoadController@update');
+Route::post('update/loads/{id}/status' , 'LoadController@updateStatus');
+Route::delete('all/loads' , 'LoadController@delete');
 
-});
+// });
 

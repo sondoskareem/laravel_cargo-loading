@@ -23,6 +23,13 @@ class Driver extends Model
         'pay_rate',
         'profile_image',
     ];
+    protected static function bootE()
+    {
+        parent::boot();
+        static::creating(function($model){
+            $model->type = 'driver';
+        });
+    }
     public function user(){
         return $this->belongsTo(User::class);
     }

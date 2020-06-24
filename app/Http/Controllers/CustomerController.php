@@ -57,13 +57,10 @@ class CustomerController extends Controller
         return Utilities::wrap($response);
     }
 
-   
-
     
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request,Customer $id)    {
         $this->validateRequest($request,'sometimes|');
-        $response = $this->CustomerRepository->update($id , $request->all());
+        $response = $this->CustomerRepository->update($id,$request);
         return Utilities::wrap($response);
     }
 
@@ -84,7 +81,7 @@ class CustomerController extends Controller
 
         return $this->validate($request,[
             'name' => $options.'required|string|unique:users',
-            'email' => 'required|email|max:255|unique:users',
+            'email' => $options.'required|email|max:255|unique:users',
             'personal_phone' => $options.'required|integer',
             'business_phone' => $options.'required|integer',
             'address' => $options.'required|string',

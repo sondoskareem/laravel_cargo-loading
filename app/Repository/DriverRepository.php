@@ -89,10 +89,56 @@ class DriverRepository extends BaseRepository {
         return Arr::flatten(Arr::prepend(array($driver),array($user)));
     }
 
-    public function update($id, $values){
-        $driver = Driver::findorFail($id);
-        $driver = tap($driver)->update($values);
-        return $driver;
+    public function update($driver, $values){
+        $user = $driver->user()->get();
+
+        $values['name'] ?: $values['name'] = $user->first()->name;
+        $values['email'] ?: $values['email'] = $user->first()->email;
+        $values['status'] ?: $values['status'] = $user->first()->status;
+        $values['personal_phone'] ?: $values['personal_phone'] = $user->first()->personal_phone;
+        $values['business_phone'] ?: $values['business_phone'] = $user->first()->business_phone;
+        $values['address'] ?: $values['address'] = $user->first()->address;
+        $values['date'] ?: $values['date'] = $user->first()->date;
+        $values['note'] ?: $values['note'] = $user->first()->note;
+
+        $values['position_id'] ?: $values['position_id'] = $driver->position_id;
+        $values['company_id'] ?: $values['company_id'] = $driver->company_id;
+        $values['birth'] ?: $values['birth'] = $driver->birth;
+        $values['home_terminal'] ?: $values['home_terminal'] = $driver->home_terminal;
+        $values['state'] ?: $values['state'] = $driver->state;
+        $values['endorsements'] ?: $values['endorsements'] = $driver->endorsements;
+        $values['hazmat'] ?: $values['hazmat'] = $driver->hazmat;
+        $values['tanker'] ?: $values['tanker'] = $driver->tanker;
+        $values['double_triple'] ?: $values['double_triple'] = $driver->double_triple;
+        $values['dl_exp'] ?: $values['dl_exp'] = $driver->dl_exp;
+        $values['medical_exp'] ?: $values['medical_exp'] = $driver->medical_exp;
+        $values['pay_rate'] ?: $values['pay_rate'] = $driver->pay_rate;
+
+        $driver = tap($driver)->update([
+            'position_id' => $values['position_id'],
+            'company_id' => $values['company_id'] ,
+            'birth' => $values['birth'] ,
+            'home_terminal' => $values['home_terminal'],
+            'state' => $values['state'] ,
+            'endorsements' => $values['endorsements'] ,
+            'hazmat' => $values['hazmat'] ,
+            'tanker' => $values['tanker'] ,
+            'dl_exp' => $values['dl_exp'] ,
+            'double_triple' => $values['double_triple'] ,
+            'medical_exp' => $values['medical_exp'] ,
+            'pay_rate' => $values['pay_rate'] ,
+        ]);
+        $user = tap($user->first())->update([
+            'name' => $values['name'],
+            'email' => $values['email'] ,
+            'status' => $values['status'] ,
+            'personal_phone' => $values['personal_phone'],
+            'business_phone' => $values['business_phone'] ,
+            'address' => $values['address'] ,
+            'date' => $values['date'] ,
+            'note' => $values['note'] ,
+        ]);
+        return true;
     }
     
     

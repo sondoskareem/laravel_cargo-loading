@@ -65,7 +65,6 @@ class EmployeeController extends Controller
         $this->validateRequest($request,'sometimes|');
         $response = $this->EmployeeRepository->update( $id  ,$request);
         return Utilities::wrap($response);
-        // return Utilities::wrap($request->all());
     }
 
     public function updateStatus(Request $request , Employee $id)
@@ -84,10 +83,8 @@ class EmployeeController extends Controller
     private function validateRequest( $request, $options = ''  ){
 
         return $this->validate($request,[
-            'name' => $options.'required|string|unique:users',
-            // 'name' => $options."required|string|unique:users , name , {{$this->user->id}}", 
-            'email' => "email|unique:users,email , {$this->user->id}", 
-        //    'email' => $options.'required|email|unique:users',
+            'name' => $options."required|string|unique:users,name,{$this->user->id}", 
+            'email' => $options."required|email|unique:users,email,{$this->user->id}", 
             'personal_phone' => $options.'required|integer',
             'business_phone' => $options.'required|integer',
             'address' => $options.'required|string',
