@@ -55,5 +55,10 @@ Route::post('update/loads/{id}' , 'LoadController@update');
 Route::post('update/loads/{id}/status' , 'LoadController@updateStatus');
 Route::delete('delete/loads/{id}' , 'LoadController@destroy');
 
+
+Route::post('companies/{id}' , 'CompanyController@show');
+Route::post('update/companies/{id}' , 'CompanyController@update');
+
 });
+Route::post('companies' , 'CompanyController@store');
 

@@ -27,7 +27,7 @@ class AuthController extends Controller
         $credentials = request(['name', 'password']);
 //
         if (! $token = auth('api')->attempt($credentials)) {
-            return response()->json(['error' => 'You msut enter required field'], 401);
+            return response()->json(['error' => 'Check your input'], 401);
         }
 
         return $this->respondWithToken($token);
@@ -77,6 +77,7 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
+            'user_type' => auth('api')->user()->type,
             'expires_in'   => auth('api')->factory()->getTTL() * 60
 
         ]);
