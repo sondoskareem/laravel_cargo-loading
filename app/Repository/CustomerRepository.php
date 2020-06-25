@@ -105,7 +105,13 @@ class CustomerRepository extends BaseRepository {
             'date' => $values['date'] ,
             'note' => $values['note'] ,
         ]);
-        return true;
+        return array('msg'=>true);
+    }
+
+    public function updateStatus($id, $values){
+        $customer = Customer::findorFail($id);
+        $customer = tap($customer->user())->update($values);
+        return array('msg'=>true);
     }
     
     

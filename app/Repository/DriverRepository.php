@@ -138,8 +138,13 @@ class DriverRepository extends BaseRepository {
             'date' => $values['date'] ,
             'note' => $values['note'] ,
         ]);
-        return true;
+        return array('msg'=>true);
     }
     
+    public function updateStatus($id, $values){
+        $driver = Driver::findorFail($id);
+        $driver = tap($driver->user())->update($values);
+        return array('msg'=>true);
+    }
     
 }

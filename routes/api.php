@@ -31,28 +31,29 @@ Route::post('customers/{id}' , 'CustomerController@show');
 Route::post('all/customers' , 'CustomerController@index');
 Route::post('update/customers/{id}' , 'CustomerController@update');
 Route::post('update/customers/{id}/status' , 'CustomerController@updateStatus');
-Route::delete('all/customers' , 'CustomerController@delete');
+Route::delete('delete/customers/{id}' , 'CustomerController@destroy');
 
 Route::post('employees' , 'EmployeeController@store');
 Route::post('employees/{id}' , 'EmployeeController@show');
 Route::post('all/employees' , 'EmployeeController@index');
 Route::post('update/employees/{id}' , 'EmployeeController@update');
 Route::post('update/employees/{id}/status' , 'EmployeeController@updateStatus');
-Route::delete('all/employees' , 'EmployeeController@delete');
+Route::delete('delete/employees/{id}' , 'EmployeeController@destroy');
 
 Route::post('drivers' , 'DriverController@store');
 Route::post('drivers/{id}' , 'DriverController@show');
 Route::post('all/drivers' , 'DriverController@index');
 Route::post('update/drivers/{id}' , 'DriverController@update');
 Route::post('update/drivers/{id}/status' , 'DriverController@updateStatus');
-Route::delete('all/drivers' , 'DriverController@delete');
+Route::delete('delete/drivers/{id}' , 'DriverController@destroy');
+
 
 Route::post('loads' , 'LoadController@store');
 Route::post('loads/{id}' , 'LoadController@show');
 Route::post('all/loads' , 'LoadController@index');
 Route::post('update/loads/{id}' , 'LoadController@update');
 Route::post('update/loads/{id}/status' , 'LoadController@updateStatus');
-Route::delete('all/loads' , 'LoadController@delete');
+Route::delete('delete/loads/{id}' , 'LoadController@destroy');
 
 });
 

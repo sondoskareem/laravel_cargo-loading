@@ -58,7 +58,7 @@ class CustomerController extends Controller
     }
 
     
-    public function update(Request $request,Customer $id)    {
+    public function update(Request $request,Customer $id) {
         $this->validateRequest($request,'sometimes|');
         $response = $this->CustomerRepository->update($id,$request);
         return Utilities::wrap($response);
@@ -67,15 +67,16 @@ class CustomerController extends Controller
     public function updateStatus(Request $request , $id)
     {
         request()->validate(['status' => 'required|string']);
-        $response = $this->CustomerRepository->update($id ,array('status' => $request->status));
+        $response = $this->CustomerRepository->updateStatus($id ,array('status' => $request->status));
         return Utilities::wrap($response);
     }
 
     public function destroy($id)
     {
-        $response = $this->CustomerRepository->update($id ,array('is_deleted' => 1));
+        $response = $this->CustomerRepository->updateStatus($id ,array('is_deleted' => 1));
         return Utilities::wrap($response);
     }
+
 
     private function validateRequest( $request, $options = ''  ){
 

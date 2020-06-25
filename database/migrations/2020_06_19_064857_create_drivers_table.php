@@ -29,7 +29,6 @@ class CreateDriversTable extends Migration
             $table->string('dl_exp');
             $table->string('medical_exp');
             $table->integer('pay_rate');
-            $table->boolean('is_deleted')->default(false);
             $table->string('profile_image');
 
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');

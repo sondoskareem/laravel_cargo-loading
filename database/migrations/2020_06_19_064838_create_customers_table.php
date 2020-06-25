@@ -23,7 +23,6 @@ class CreateCustomersTable extends Migration
             $table->boolean('invoice_mail');
             $table->integer('personal_fax');
             $table->integer('business_fax');
-            $table->boolean('is_deleted')->default(false);
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

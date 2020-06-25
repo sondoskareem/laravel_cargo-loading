@@ -67,19 +67,19 @@ class EmployeeController extends Controller
         return Utilities::wrap($response);
     }
 
-    public function updateStatus(Request $request , Employee $id)
+    public function updateStatus(Request $request , $id)
     {
         request()->validate(['status' => 'required|string']);
-        $response = $this->EmployeeRepository->update($id ,array('status' => $request->status));
+        $response = $this->EmployeeRepository->updateStatus($id ,array('status' => $request->status));
         return Utilities::wrap($response);
     }
 
     public function destroy($id)
     {
-        $response = $this->EmployeeRepository->createOrupdate($id ,array('is_deleted' => 1));
+        $response = $this->EmployeeRepository->updateStatus($id ,array('is_deleted' => 1));
         return Utilities::wrap($response);
     }
-
+    
     private function validateRequest( $request, $options = ''  ){
 
         return $this->validate($request,[

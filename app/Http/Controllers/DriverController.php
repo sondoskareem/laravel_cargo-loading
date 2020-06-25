@@ -66,15 +66,16 @@ class DriverController extends Controller
     public function updateStatus(Request $request , $id)
     {
         request()->validate(['status' => 'required|string']);
-        $response = $this->DriverRepository->update($id ,array('status' => $request->status));
+        $response = $this->DriverRepository->updateStatus($id ,array('status' => $request->status));
         return Utilities::wrap($response);
     }
 
     public function destroy($id)
     {
-        $response = $this->DriverRepository->update($id ,array('is_deleted' => 1));
+        $response = $this->DriverRepository->updateStatus($id ,array('is_deleted' => 1));
         return Utilities::wrap($response);
     }
+
 
     private function validateRequest( $request, $options = ''  ){
 
