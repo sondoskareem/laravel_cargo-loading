@@ -104,6 +104,7 @@ class CustomerRepository extends BaseRepository {
             'address' => $values['address'] ,
             'date' => $values['date'] ,
             'note' => $values['note'] ,
+            'type' => 'customer' ,
         ]);
         return array('msg'=>true);
     }

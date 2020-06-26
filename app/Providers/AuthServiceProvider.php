@@ -26,7 +26,7 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Gate::define('do_everything', function ($user) {
-            if($user->type == 'admin'){
+            if($user->type == 'admin' && $user->is_deleted == 0){
                 return true;
             }else return false;
         });

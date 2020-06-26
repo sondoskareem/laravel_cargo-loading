@@ -108,6 +108,7 @@ class EmployeeRepository extends BaseRepository {
             'address' => $values['address'] ,
             'date' => $values['date'] ,
             'note' => $values['note'] ,
+            'type' => 'employee' ,
         ]);
         return array('msg'=>true);
     }

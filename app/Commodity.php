@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Commodity extends Model
 {
-    public function load_stop(){
-        return $this->belongsTo(Load_stop::class);
+    public function stop(){
+        return $this->belongsTo(Stop::class);
     }
 }

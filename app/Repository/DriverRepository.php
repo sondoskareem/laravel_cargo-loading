@@ -137,6 +137,7 @@ class DriverRepository extends BaseRepository {
             'address' => $values['address'] ,
             'date' => $values['date'] ,
             'note' => $values['note'] ,
+            'type' => 'driver' ,
         ]);
         return array('msg'=>true);
     }

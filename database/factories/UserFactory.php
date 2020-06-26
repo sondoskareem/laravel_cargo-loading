@@ -23,7 +23,7 @@ $factory->define(User::class, function (Faker $faker) {
         'business_phone' => $faker->phoneNumber,
         'personal_phone' => $faker->phoneNumber,
         'status' => true,
-        'type' => $faker->randomElement([true , false]),
+        'type' => 'Not Admin',
         'address' => $faker->address,
         'date' => $faker->dateTime($max = 'now', $timezone = null),
         'note' => $faker->sentence,

@@ -27,7 +27,7 @@ $factory->define(Load::class, function (Faker $faker) {
         'customer_id' => $employee->id,
         'employee_id' => $customer->id,
         'po_load' => $faker->word,
-        'load_rate' => $faker->word,
+        'load_rate' => $faker->randomDigit,
         'loaded_mile' => $faker->randomDigit,
         'load_type' => $faker->word,
         'trailer_type' => $faker->word,
@@ -35,8 +35,6 @@ $factory->define(Load::class, function (Faker $faker) {
         'number_of_stop' => 1,
         'trailer_model' => 'Big Trailer',
         'status' => 'binding',
-        'temp' => $faker->randomDigit,
-        'is_deleted'=>false
 
     ];
 });

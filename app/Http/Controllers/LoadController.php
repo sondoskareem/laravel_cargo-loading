@@ -14,7 +14,8 @@ class LoadController extends Controller
     public function __construct()
     {
         $this->LoadRepository = new LoadRepository(new Load());
-        // $this->user = auth()->user();
+        $this->middleware('auth:api');
+        $this->user = auth('api')->user();
     }
     
     public function index(Request $request)
@@ -60,13 +61,24 @@ class LoadController extends Controller
    
 
     
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request,Load $id) { 
+        $this->validateRequest($request,'sometimes|');
+        $response = $this->LoadRepository->update($id,$request);
+        return Utilities::wrap($response);
     }
 
     
-    public function destroy($id)
+    public function updateStatus(Request $request , Load $id)
     {
+        request()->validate(['status' => 'required|string']);
+        $response = $this->LoadRepository->updateStatus($id ,array('status' => $request->status));
+        return Utilities::wrap($response);
+    }
+
+    public function destroy(Load $id)
+    {
+        $response = $this->LoadRepository->destroy($id ,array('is_deleted' => true));
+        return Utilities::wrap($response);
     }
 
     private function validateRequest( $request, $options = ''  ){

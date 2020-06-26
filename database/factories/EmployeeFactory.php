@@ -25,7 +25,7 @@ use Illuminate\Support\Str;
 $factory->define(Employee::class, function (Faker $faker) {
     $Position_id=factory(Position::class , 1)->create()->first();
     $Company_id=factory(Company::class , 1)->create()->first();
-    $user_id=factory(User::class , 1)->create()->first();
+    $user_id=factory(User::class , 1)->create(['name'=>'admin' , 'type'=>'admin'])->first();
     return [
         'position_id' => $Position_id->id,
         'company_id' =>$Company_id->id,
@@ -33,8 +33,9 @@ $factory->define(Employee::class, function (Faker $faker) {
         'birth' => $faker->dateTime($max = 'now', $timezone = null),
         'pay_rate_per_hour' => $faker->randomDigit,
         'education' => 'B.degree',
-        'is_deleted'=>false,
         'profile_image'=>"/uploads/images/any_1592849855.jpg"
 
     ];
+   
 });
+

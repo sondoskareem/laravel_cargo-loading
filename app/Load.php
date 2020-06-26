@@ -19,6 +19,11 @@ class Load extends Model
         'trailer_model',
         'status',
     ];
+
+    public function stops(){
+        return $this->hasMany(Stop::class);
+    }
+
     public function customer(){
         return $this->belongsTo(Customer::class);
     }
@@ -27,7 +32,5 @@ class Load extends Model
         return $this->belongsTo(Employee::class);
     }
 
-    public function load_stops(){
-        return $this->hasMany(Load_stop::class);
-    }
+    
 }
