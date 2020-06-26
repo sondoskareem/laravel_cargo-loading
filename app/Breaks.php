@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Load_stop extends Model
+class Breaks extends Model
 {
     protected $fillable = [
         'load_id',
@@ -13,16 +13,12 @@ class Load_stop extends Model
         'trailer_type',
         'facility',
         'address',
-        'contact',
         'phone',
+        'driver_work',
         'appointment_type',
         'facility_note',
     ];
-
-    public function load(){
+    public function loads(){
         return $this->belongsTo(Load::class);
-    }
-    public function commodity(){
-        return $this->hasMany(Commodity::class);
     }
 }
