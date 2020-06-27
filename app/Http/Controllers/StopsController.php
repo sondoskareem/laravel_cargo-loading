@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Repository\StopRepository;
-use App\Breaks;
+use App\Stop;
 use App\Helper\Utilities;
 class StopsController extends Controller
 {
@@ -12,7 +12,7 @@ class StopsController extends Controller
     private $StopRepository;
     public function __construct()
     {
-        $this->StopRepository = new StopRepository(new Breaks());
+        $this->StopRepository = new StopRepository(new Stop());
         $this->middleware('auth:api');
         $this->user = auth('api')->user();
     }
@@ -60,7 +60,7 @@ class StopsController extends Controller
    
 
     
-    public function update(Request $request,Breaks $id) { 
+    public function update(Request $request,Stop $id) { 
         $this->validateRequest($request,'sometimes|');
         $response = $this->StopRepository->update($id,$request);
         return Utilities::wrap($response);
@@ -68,7 +68,7 @@ class StopsController extends Controller
 
     
     
-    public function destroy(Breaks $id)
+    public function destroy(Stop $id)
     {
         $response = $this->StopRepository->destroy($id ,array('is_deleted' => true));
         return Utilities::wrap($response);
@@ -83,7 +83,7 @@ class StopsController extends Controller
             'trailer_type' => $options.'required|string',
             'facility' => $options.'required|string',
             'address' => $options.'required|string',
-            'phone' => $options.'required|integer',
+            'phone' => $options.'required|integer|min:6',
             'appointment_type' => $options.'required|string',
             'driver_work' => $options.'required|string',
             'facility_note' => $options.'required|string',

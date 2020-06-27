@@ -14,10 +14,14 @@ class Stop extends Model
         'facility',
         'address',
         'phone',
+        'driver_work',
         'appointment_type',
         'facility_note',
-    ]; 
+    ];
     public function loads(){
         return $this->belongsTo(Load::class);
+    }
+    public function commodities(){
+        return $this->hasMany(Commodity::class);
     }
 }

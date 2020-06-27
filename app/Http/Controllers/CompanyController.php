@@ -24,9 +24,9 @@ class CompanyController extends Controller
     }
 
     
-    public function show(Company $id)
+    public function show()
     {
-        $response = $this->CompanyRepository->getById($id);
+        $response = $this->CompanyRepository->getCompany();
         return Utilities::wrap($response);
     }
 
@@ -44,7 +44,7 @@ class CompanyController extends Controller
         return $this->validate($request,[
             'name' => $options.'required|string',
             'email' => $options.'required|email|max:255|unique:users',
-            'phone' => $options.'required|integer',
+            'phone' => $options.'required|integer|min:6',
             'first_address' => $options.'required|string',
             'second_address' => $options.'required|string',
             'fax' => $options.'required|integer',

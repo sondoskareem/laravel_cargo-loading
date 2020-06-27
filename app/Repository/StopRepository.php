@@ -1,45 +1,20 @@
 <?php
 namespace App\Repository;
 
-use App\Customer;
+use App\Load;
 use Illuminate\Support\Facades\DB;
 use App\Helper\Utilities;
 use Validator,Redirect,Response,File;
 use Illuminate\Support\Arr;
 use App\Traits\UploadTrait;
-use App\Breaks;
+use App\Stop;
 use Str;
 class StopRepository extends BaseRepository {
     use UploadTrait;
 
-    public function getList($conditions, $columns, $sort, $skip, $take)
-    {
-        $result = Breaks::where('is_deleted', '=', 0)->where($conditions);
-
-        if(!is_null($columns))
-            $result = $result->select($columns);
-
-        if(!is_null($sort))
-            $result = $result->orderBy($sort->column, $sort->dir);
-
-       $response = [
-           'items' => $result->skip($skip)->take($take)->get(),
-           'totalCount' => $result->count()
-       ];
-
-       return $response;
-    }
-
-    public function getById($id){
-        $Breaks = Breaks::findorFail($id);
-        $customer = $Breaks->customer()->get();
-        $finalLoad = Arr::flatten(Arr::prepend(array($Breaks),array($customer)));
-
-        return $finalLoad;
-    }
 
     public function create($data){
-            $Stop = Breaks::create([
+            $Stop = Stop::create([
                 'load_id' =>$data['load_id'],
                 'load_type' =>$data['load_type'],
                 'stop_description' =>$data['stop_description'],
@@ -84,8 +59,6 @@ class StopRepository extends BaseRepository {
         ]);
         return $stops;
     }
-    
-    
     
     public function destroy($stops ,$values){
        $stops['is_deleted'] =$values['is_deleted'];

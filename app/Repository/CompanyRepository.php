@@ -2,6 +2,7 @@
 namespace App\Repository;
 
 use App\Company;
+use App\Employee;
 use Illuminate\Support\Facades\DB;
 use App\Helper\Utilities;
 use Validator,Redirect,Response,File;
@@ -10,8 +11,10 @@ use Str;
 class CompanyRepository extends BaseRepository {
 
     
-    public function getById($id){
-        return $id;
+    public function getCompany(){
+        $company = Employee::where('user_id' ,auth('api')->user()->id)->get();
+        $company = $company->first()->company()->get();
+        return $company->first() ;
     }
 
     public function create($data){

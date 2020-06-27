@@ -33,7 +33,8 @@ class LoadRepository extends BaseRepository {
     public function getById($id){
         $Load = Load::findorFail($id);
         $customer = $Load->customer()->get();
-        $finalLoad = Arr::flatten(Arr::prepend(array($Load),array($customer)));
+        $stops = $Load->stops()->get();
+        $finalLoad = (['Load'=>$Load,'Customer'=>$customer, 'Stops' =>$stops]);
 
         return $finalLoad;
     }

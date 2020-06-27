@@ -82,8 +82,8 @@ class DriverController extends Controller
         return $this->validate($request,[
             'name' => $options."required|string|unique:users,name,{$this->user->id}", 
             'email' => $options."required|email|unique:users,email,{$this->user->id}", 
-            'personal_phone' => $options.'required|integer',
-            'business_phone' => $options.'required|integer',
+            'personal_phone' => $options.'required|integer|min:6',
+            'business_phone' => $options.'required|integer|min:6',
             'address' => $options.'required|string',
             'date' => $options.'required|string',
             'status' => $options.'required|string',

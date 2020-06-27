@@ -15,13 +15,14 @@ class CreateCommoditiesTable extends Migration
     {
         Schema::create('commodities', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('breaks_id');
+            $table->unsignedBigInteger('stop_id');
             $table->string('description');
             $table->string('Packaging');
             $table->integer('quantity');
             $table->integer('weight');
+            $table->boolean('is_deleted')->default(false);
 
-            $table->foreign('breaks_id')->references('id')->on('breaks')->onDelete('cascade');
+            $table->foreign('stop_id')->references('id')->on('stops')->onDelete('cascade');
 
 
             $table->timestamps();

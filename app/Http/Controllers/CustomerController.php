@@ -83,8 +83,8 @@ class CustomerController extends Controller
         return $this->validate($request,[
             'name' => $options.'required|string|unique:users',
             'email' => $options.'required|email|max:255|unique:users',
-            'personal_phone' => $options.'required|integer',
-            'business_phone' => $options.'required|integer',
+            'personal_phone' => $options.'required|integer|min:6',
+            'business_phone' => $options.'required|integer|min:6',
             'address' => $options.'required|string',
             'date' => $options.'required|string',
             'status' => $options.'required|string',

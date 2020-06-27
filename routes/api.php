@@ -28,7 +28,7 @@ Route::post('companies' , 'CompanyController@store');
 Route::group(['middleware' => ['can:do_everything']], function () {
 
         
-    Route::post('companies/{id}' , 'CompanyController@show');
+    Route::get('companies' , 'CompanyController@show');
     Route::post('update/companies/{id}' , 'CompanyController@update');
         
     Route::post('customers' , 'CustomerController@store');
@@ -64,9 +64,23 @@ Route::group(['middleware' => ['can:do_everything']], function () {
     Route::post('update/stops/{id}' , 'StopsController@update');
     Route::delete('delete/stops/{id}' , 'StopsController@destroy');
 
+    Route::post('commodity' , 'CommodityController@store');
+    Route::post('update/commodity/{id}' , 'CommodityController@update');
+    Route::delete('delete/commodity/{id}' , 'CommodityController@destroy');
 
+    Route::post('factoring' , 'FactoringController@store');
+    Route::post('all/factoring' , 'FactoringController@index');
+    Route::post('update/factoring/{id}' , 'FactoringController@update');
+    Route::delete('delete/factoring/{id}' , 'FactoringController@destroy');
 
+    Route::post('equipment' , 'EquipmentController@store');
+    Route::post('all/equipment' , 'EquipmentController@index');
+    Route::post('update/equipment/{id}' , 'EquipmentController@update');
+    Route::delete('delete/equipment/{id}' , 'EquipmentController@destroy');
 
-
+    Route::post('representative' , 'RepresentativeController@store');
+    Route::post('all/representative' , 'RepresentativeController@index');
+    Route::post('update/representative/{id}' , 'RepresentativeController@update');
+    Route::delete('delete/representative/{id}' , 'RepresentativeController@destroy');
 });
 
