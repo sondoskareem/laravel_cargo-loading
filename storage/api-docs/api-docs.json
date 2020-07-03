@@ -1,0 +1,1773 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Cargexo Documentation",
+        "contact": {
+            "email": "admin@admin.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000/api",
+            "description": "Cargexo API documentation"
+        }
+    ],
+    "paths": {
+        "/all/drivers": {
+            "post": {
+                "tags": [
+                    "Driver"
+                ],
+                "summary": "get all drivers",
+                "description": "get all drivers",
+                "operationId": "get all drivers",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "filter": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "columns": {
+                                        "type": "string"
+                                    },
+                                    "sort": {
+                                        "type": "string"
+                                    },
+                                    "skip": {
+                                        "type": "string",
+                                        "example": "0"
+                                    },
+                                    "take": {
+                                        "type": "string",
+                                        "example": "10"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/drivers": {
+            "post": {
+                "tags": [
+                    "Driver"
+                ],
+                "summary": "create drivers",
+                "description": "create drivers",
+                "operationId": "create drivers",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "personal_phone": {
+                                        "type": "integer"
+                                    },
+                                    "business_phone": {
+                                        "type": "integer"
+                                    },
+                                    "address": {
+                                        "type": "string"
+                                    },
+                                    "date": {
+                                        "type": "string"
+                                    },
+                                    "note": {
+                                        "type": "string"
+                                    },
+                                    "status": {
+                                        "type": "string"
+                                    },
+                                    "position_id": {
+                                        "type": "integer"
+                                    },
+                                    "company_id": {
+                                        "type": "integer"
+                                    },
+                                    "birth": {
+                                        "type": "string"
+                                    },
+                                    "home_terminal": {
+                                        "type": "string"
+                                    },
+                                    "dl_hash": {
+                                        "type": "string"
+                                    },
+                                    "state": {
+                                        "type": "string"
+                                    },
+                                    "endorsements": {
+                                        "type": "string"
+                                    },
+                                    "hazmat": {
+                                        "type": "boolean"
+                                    },
+                                    "tanker": {
+                                        "type": "boolean"
+                                    },
+                                    "double_triple": {
+                                        "type": "boolean"
+                                    },
+                                    "dl_exp": {
+                                        "type": "string"
+                                    },
+                                    "profile_image": {
+                                        "type": "file"
+                                    },
+                                    "medical_exp": {
+                                        "type": "string"
+                                    },
+                                    "pay_rate": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/drivers/{id}": {
+            "post": {
+                "tags": [
+                    "Driver"
+                ],
+                "summary": "Get drivers By ID",
+                "description": "Returns drivers full info",
+                "operationId": "get drivers ByID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "driverID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/update/drivers/{id}": {
+            "post": {
+                "tags": [
+                    "Employee"
+                ],
+                "summary": "update drivers",
+                "description": "update drivers",
+                "operationId": "update drivers",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "personal_phone": {
+                                        "type": "integer"
+                                    },
+                                    "business_phone": {
+                                        "type": "integer"
+                                    },
+                                    "address": {
+                                        "type": "string"
+                                    },
+                                    "date": {
+                                        "type": "string"
+                                    },
+                                    "note": {
+                                        "type": "string"
+                                    },
+                                    "status": {
+                                        "type": "string"
+                                    },
+                                    "position_id": {
+                                        "type": "integer"
+                                    },
+                                    "company_id": {
+                                        "type": "integer"
+                                    },
+                                    "birth": {
+                                        "type": "string"
+                                    },
+                                    "home_terminal": {
+                                        "type": "string"
+                                    },
+                                    "dl_hash": {
+                                        "type": "string"
+                                    },
+                                    "state": {
+                                        "type": "string"
+                                    },
+                                    "endorsements": {
+                                        "type": "string"
+                                    },
+                                    "hazmat": {
+                                        "type": "boolean"
+                                    },
+                                    "tanker": {
+                                        "type": "boolean"
+                                    },
+                                    "double_triple": {
+                                        "type": "boolean"
+                                    },
+                                    "dl_exp": {
+                                        "type": "string"
+                                    },
+                                    "profile_image": {
+                                        "type": "file"
+                                    },
+                                    "medical_exp": {
+                                        "type": "string"
+                                    },
+                                    "pay_rate": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/update/drivers/{id}/status": {
+            "post": {
+                "tags": [
+                    "Driver"
+                ],
+                "summary": "update drivers status ",
+                "description": "update drivers status",
+                "operationId": "update drivers status",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "driversID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "status": {
+                                        "type": "string",
+                                        "example": ""
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/delete/drivers/{id}": {
+            "delete": {
+                "tags": [
+                    "Driver"
+                ],
+                "summary": "delete drivers ",
+                "description": "delete drivers",
+                "operationId": "delete driver",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "employeeID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/all/employees": {
+            "post": {
+                "tags": [
+                    "Employee"
+                ],
+                "summary": "get all employees",
+                "description": "get all Employee",
+                "operationId": "get all employees",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "filter": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "columns": {
+                                        "type": "string"
+                                    },
+                                    "sort": {
+                                        "type": "string"
+                                    },
+                                    "skip": {
+                                        "type": "string",
+                                        "example": "0"
+                                    },
+                                    "take": {
+                                        "type": "string",
+                                        "example": "10"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/employees": {
+            "post": {
+                "tags": [
+                    "Employee"
+                ],
+                "summary": "create employees",
+                "description": "create Employee",
+                "operationId": "create employees",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "personal_phone": {
+                                        "type": "integer"
+                                    },
+                                    "business_phone": {
+                                        "type": "integer"
+                                    },
+                                    "address": {
+                                        "type": "string"
+                                    },
+                                    "date": {
+                                        "type": "string"
+                                    },
+                                    "note": {
+                                        "type": "string"
+                                    },
+                                    "status": {
+                                        "type": "string"
+                                    },
+                                    "position_id": {
+                                        "type": "integer"
+                                    },
+                                    "company_id": {
+                                        "type": "integer"
+                                    },
+                                    "birth": {
+                                        "type": "string"
+                                    },
+                                    "pay_rate_per_hour": {
+                                        "type": "integer"
+                                    },
+                                    "education": {
+                                        "type": "string"
+                                    },
+                                    "profile_image": {
+                                        "type": "file"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/employees/{id}": {
+            "post": {
+                "tags": [
+                    "Employee"
+                ],
+                "summary": "Get employee By ID",
+                "description": "Returns employee full info",
+                "operationId": "getEmployeeByID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "employeeID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/update/employees/{id}": {
+            "post": {
+                "tags": [
+                    "Employee"
+                ],
+                "summary": "update employees",
+                "description": "update employees",
+                "operationId": "update employees",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "employeeID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "personal_phone": {
+                                        "type": "integer"
+                                    },
+                                    "business_phone": {
+                                        "type": "integer"
+                                    },
+                                    "address": {
+                                        "type": "string"
+                                    },
+                                    "date": {
+                                        "type": "string"
+                                    },
+                                    "note": {
+                                        "type": "string"
+                                    },
+                                    "status": {
+                                        "type": "string"
+                                    },
+                                    "position_id": {
+                                        "type": "integer"
+                                    },
+                                    "company_id": {
+                                        "type": "integer"
+                                    },
+                                    "birth": {
+                                        "type": "string"
+                                    },
+                                    "pay_rate_per_hour": {
+                                        "type": "integer"
+                                    },
+                                    "education": {
+                                        "type": "string"
+                                    },
+                                    "profile_image": {
+                                        "type": "file"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/update/employees/{id}/status": {
+            "post": {
+                "tags": [
+                    "Employee"
+                ],
+                "summary": "update employee status ",
+                "description": "update employee status",
+                "operationId": "updateEmployee status",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "employeeID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "status": {
+                                        "type": "string",
+                                        "example": ""
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "delete/employees/{id}": {
+            "delete": {
+                "tags": [
+                    "Employee"
+                ],
+                "summary": "delete employee ",
+                "description": "delete employee",
+                "operationId": "deleteEmployee",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "employeeID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Commodity": {
+                "title": "Commodity",
+                "description": "Commodity model",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "stop_id": {
+                        "title": "stop_id",
+                        "description": "stop_id",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "description": {
+                        "title": "description",
+                        "description": "description",
+                        "type": "string",
+                        "format": "string",
+                        "example": "string"
+                    },
+                    "Packaging": {
+                        "title": "Packaging",
+                        "description": "Packaging",
+                        "type": "string",
+                        "format": "string",
+                        "example": "string"
+                    },
+                    "quantity": {
+                        "title": "quantity",
+                        "description": "quantity",
+                        "type": "integer",
+                        "format": "int",
+                        "example": 100
+                    },
+                    "weight": {
+                        "title": "weight",
+                        "description": "weight",
+                        "type": "integer",
+                        "format": "int",
+                        "example": 100
+                    },
+                    "is_deleted": {
+                        "title": "is_deleted",
+                        "description": "is_deleted",
+                        "type": "boolean",
+                        "format": "bool",
+                        "example": false
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Commodity"
+                }
+            },
+            "Company": {
+                "title": "Company",
+                "description": "Company model",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "name",
+                        "type": "string",
+                        "format": "string",
+                        "example": "CompanyNAme"
+                    },
+                    "phone": {
+                        "title": "phone",
+                        "description": "phone",
+                        "type": "integer",
+                        "format": "int",
+                        "example": "Companyphone"
+                    },
+                    "email": {
+                        "title": "email",
+                        "description": "email",
+                        "type": "string",
+                        "format": "string",
+                        "example": "Companyemail"
+                    },
+                    "first_address": {
+                        "title": "first_address",
+                        "description": "first_address",
+                        "type": "string",
+                        "format": "string",
+                        "example": "Companyfirst_address"
+                    },
+                    "second_address": {
+                        "title": "second_address",
+                        "description": "second_address",
+                        "type": "string",
+                        "format": "string",
+                        "example": "Companysecond_address"
+                    },
+                    "fax": {
+                        "title": "fax",
+                        "description": "fax",
+                        "type": "integer",
+                        "format": "int",
+                        "example": "Companyfax"
+                    },
+                    "is_deleted": {
+                        "title": "is_deleted",
+                        "description": "is_deleted",
+                        "type": "boolean",
+                        "format": "bool",
+                        "example": "is_deleted"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Company"
+                }
+            },
+            "Customer": {
+                "title": "Customer",
+                "description": "Customer model",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "user_id": {
+                        "title": "user_id",
+                        "description": "user_id",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "mc_number": {
+                        "title": "mc_number",
+                        "description": "mc_number",
+                        "type": "string",
+                        "format": "string",
+                        "example": "String"
+                    },
+                    "dot_number": {
+                        "title": "dot_number",
+                        "description": "dot_number",
+                        "type": "string",
+                        "format": "string",
+                        "example": "String"
+                    },
+                    "website": {
+                        "title": "website",
+                        "description": "website",
+                        "type": "string",
+                        "format": "string",
+                        "example": "String"
+                    },
+                    "invoive_factoring_approvment": {
+                        "title": "invoive_factoring_approvment",
+                        "description": "invoive_factoring_approvment",
+                        "type": "boolean",
+                        "format": "bool",
+                        "example": false
+                    },
+                    "invoice_mail": {
+                        "title": "invoice_mail",
+                        "description": "invoice_mail",
+                        "type": "boolean",
+                        "format": "bool",
+                        "example": false
+                    },
+                    "personal_fax": {
+                        "title": "personal_fax",
+                        "description": "personal_fax",
+                        "type": "integer",
+                        "format": "int",
+                        "example": 231131
+                    },
+                    "business_fax": {
+                        "title": "business_fax",
+                        "description": "business_fax",
+                        "type": "integer",
+                        "format": "int",
+                        "example": 231131
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Customer"
+                }
+            },
+            "Driver": {
+                "title": "Driver",
+                "description": "Driver model",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "position_id": {
+                        "title": "position_id",
+                        "description": "position_id",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "company_id": {
+                        "title": "company_id",
+                        "description": "company_id",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "birth": {
+                        "title": "birth",
+                        "description": "birth",
+                        "type": "integer",
+                        "format": "string",
+                        "example": "date"
+                    },
+                    "home_terminal": {
+                        "title": "home_terminal",
+                        "description": "home_terminal",
+                        "type": "string",
+                        "format": "string",
+                        "example": "*****"
+                    },
+                    "dl_hash": {
+                        "title": "dl_hash",
+                        "description": "dl_hash",
+                        "type": "string",
+                        "format": "string",
+                        "example": "string"
+                    },
+                    "state": {
+                        "title": "state",
+                        "description": "state",
+                        "type": "string",
+                        "format": "string",
+                        "example": "string"
+                    },
+                    "endorsements": {
+                        "title": "endorsements",
+                        "description": "endorsements",
+                        "type": "string",
+                        "format": "string",
+                        "example": "string"
+                    },
+                    "hazmat": {
+                        "title": "hazmat",
+                        "description": "hazmat",
+                        "type": "boolean",
+                        "format": "bool",
+                        "example": "false"
+                    },
+                    "tanker": {
+                        "title": "tanker",
+                        "description": "tanker",
+                        "type": "boolean",
+                        "format": "bool",
+                        "example": "false"
+                    },
+                    "double_triple": {
+                        "title": "double_triple",
+                        "description": "double_triple",
+                        "type": "boolean",
+                        "format": "bool",
+                        "example": "false"
+                    },
+                    "dl_exp": {
+                        "title": "dl_exp",
+                        "description": "dl_exp",
+                        "type": "string",
+                        "format": "string",
+                        "example": "date"
+                    },
+                    "medical_exp": {
+                        "title": "medical_exp",
+                        "description": "medical_exp",
+                        "type": "string",
+                        "format": "string",
+                        "example": "date"
+                    },
+                    "pay_rate": {
+                        "title": "pay_rate",
+                        "description": "pay_rate",
+                        "type": "integer",
+                        "format": "int",
+                        "example": 10
+                    },
+                    "profile_image": {
+                        "title": "profile_image",
+                        "description": "profile_image",
+                        "type": "string",
+                        "format": "string",
+                        "example": "img.jpg"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Driver"
+                }
+            },
+            "Employee": {
+                "title": "Employee",
+                "description": "Employee model",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "position_id": {
+                        "title": "position_id",
+                        "description": "position_id",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "company_id": {
+                        "title": "company_id",
+                        "description": "company_id",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "birth": {
+                        "title": "birth",
+                        "description": "birth",
+                        "type": "string",
+                        "format": "string",
+                        "example": "date"
+                    },
+                    "pay_rate_per_hour": {
+                        "title": "pay_rate_per_hour",
+                        "description": "pay_rate_per_hour",
+                        "type": "integer",
+                        "format": "int",
+                        "example": "date"
+                    },
+                    "education": {
+                        "title": "education",
+                        "description": "education",
+                        "type": "string",
+                        "format": "string",
+                        "example": "string"
+                    },
+                    "profile_image": {
+                        "title": "profile_image",
+                        "description": "profile_image",
+                        "type": "string",
+                        "format": "string",
+                        "example": "img.jpg"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Employee"
+                }
+            },
+            "Equipment": {
+                "title": "Equipment",
+                "description": "Equipment model",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "company_id": {
+                        "title": "company_id",
+                        "description": "company_id",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "car_type": {
+                        "title": "car_type",
+                        "description": "car_type",
+                        "type": "string",
+                        "format": "string",
+                        "example": "****"
+                    },
+                    "plate": {
+                        "title": "plate",
+                        "description": "plate",
+                        "type": "string",
+                        "format": "string",
+                        "example": "****"
+                    },
+                    "state": {
+                        "title": "state",
+                        "description": "state",
+                        "type": "string",
+                        "format": "string",
+                        "example": "****"
+                    },
+                    "make": {
+                        "title": "make",
+                        "description": "make",
+                        "type": "string",
+                        "format": "string",
+                        "example": "****"
+                    },
+                    "model": {
+                        "title": "model",
+                        "description": "model",
+                        "type": "string",
+                        "format": "string",
+                        "example": "any string"
+                    },
+                    "color": {
+                        "title": "color",
+                        "description": "color",
+                        "type": "string",
+                        "format": "string",
+                        "example": "any color"
+                    },
+                    "year": {
+                        "title": "year",
+                        "description": "year",
+                        "type": "string",
+                        "format": "string",
+                        "example": "any date"
+                    },
+                    "service_type": {
+                        "title": "service_type",
+                        "description": "service_type",
+                        "type": "string",
+                        "format": "string",
+                        "example": "any string"
+                    },
+                    "vin_number": {
+                        "title": "vin_number",
+                        "description": "vin_number",
+                        "type": "string",
+                        "format": "string",
+                        "example": "any string"
+                    },
+                    "is_deleted": {
+                        "title": "is_deleted",
+                        "description": "is_deleted",
+                        "type": "boolean",
+                        "format": "bool",
+                        "example": false
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Equipment"
+                }
+            },
+            "Factoring": {
+                "title": "Factoring",
+                "description": "Factoring model",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "company_id": {
+                        "title": "company_id",
+                        "description": "company_id",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "name",
+                        "type": "string",
+                        "format": "string",
+                        "example": "ANY"
+                    },
+                    "address": {
+                        "title": "address",
+                        "description": "address",
+                        "type": "string",
+                        "format": "string",
+                        "example": "ANY ADDRESS"
+                    },
+                    "phone": {
+                        "title": "phone",
+                        "description": "phone",
+                        "type": "integer",
+                        "format": "int",
+                        "example": "ANY phone"
+                    },
+                    "fax": {
+                        "title": "fax",
+                        "description": "fax",
+                        "type": "integer",
+                        "format": "string",
+                        "example": "ANY fax"
+                    },
+                    "contract_exp": {
+                        "title": "contract_exp",
+                        "description": "contract exp date",
+                        "type": "string",
+                        "format": "string",
+                        "example": "ANY date"
+                    },
+                    "advanced_rate": {
+                        "title": "advanced_rate",
+                        "description": "advanced_rate",
+                        "type": "integer",
+                        "format": "int",
+                        "example": 1
+                    },
+                    "reserve_ammount": {
+                        "title": "reserve_ammount",
+                        "description": "reserve_ammount",
+                        "type": "integer",
+                        "format": "int",
+                        "example": 1
+                    },
+                    "escrow_fee": {
+                        "title": "escrow_fee",
+                        "description": "escrow_fee",
+                        "type": "integer",
+                        "format": "int",
+                        "example": 1
+                    },
+                    "monthly_minimum": {
+                        "title": "monthly_minimum",
+                        "description": "monthly_minimum",
+                        "type": "integer",
+                        "format": "int",
+                        "example": 1
+                    },
+                    "is_deleted": {
+                        "title": "is_deleted",
+                        "description": "is_deleted",
+                        "type": "boolean",
+                        "format": "bool",
+                        "example": false
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Factoring"
+                }
+            },
+            "Load": {
+                "title": "Load",
+                "description": "Load model",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "customer_id": {
+                        "title": "customer_id",
+                        "description": "customer_id",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "employee_id": {
+                        "title": "employee_id",
+                        "description": "employee_id",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "po_load": {
+                        "title": "po_load",
+                        "description": "po_load",
+                        "type": "string",
+                        "format": "string",
+                        "example": "*****"
+                    },
+                    "load_rate": {
+                        "title": "load_rate",
+                        "description": "load_rate",
+                        "type": "integer",
+                        "format": "int",
+                        "example": 3
+                    },
+                    "loaded_mile": {
+                        "title": "loaded_mile",
+                        "description": "loaded_mile",
+                        "type": "integer",
+                        "format": "int",
+                        "example": 12
+                    },
+                    "load_type": {
+                        "title": "load_type",
+                        "description": "load_type",
+                        "type": "string",
+                        "format": "string",
+                        "example": "*****"
+                    },
+                    "trailer_type": {
+                        "title": "trailer_type",
+                        "description": "trailer_type",
+                        "type": "string",
+                        "format": "string",
+                        "example": "*****"
+                    },
+                    "endorsements": {
+                        "title": "endorsements",
+                        "description": "endorsements",
+                        "type": "boolean",
+                        "format": "bool",
+                        "example": "*****"
+                    },
+                    "number_of_stop": {
+                        "title": "number_of_stop",
+                        "description": "number_of_stop min 2 ",
+                        "type": "integer",
+                        "format": "int",
+                        "example": 2
+                    },
+                    "trailer_model": {
+                        "title": "trailer_model",
+                        "description": "trailer_model min 2 ",
+                        "type": "string",
+                        "format": "string",
+                        "example": "***"
+                    },
+                    "status": {
+                        "title": "status",
+                        "description": "status min 2 ",
+                        "type": "string",
+                        "format": "string",
+                        "example": "***"
+                    },
+                    "is_deleted": {
+                        "title": "is_deleted",
+                        "description": "is_deleted",
+                        "type": "boolean",
+                        "format": "bool",
+                        "example": false
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "load"
+                }
+            },
+            "Position": {
+                "title": "positions",
+                "description": "Position model",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "company_id": {
+                        "title": "company_id",
+                        "description": "company_id",
+                        "type": "string",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "description": {
+                        "title": "description",
+                        "description": "description",
+                        "type": "string",
+                        "format": "string",
+                        "example": "ClassA or Engineer"
+                    },
+                    "target": {
+                        "title": "target",
+                        "description": "target",
+                        "type": "string",
+                        "format": "string",
+                        "example": "employee or driver"
+                    },
+                    "is_deleted": {
+                        "title": "is_deleted",
+                        "description": "is_deleted",
+                        "type": "boolean",
+                        "format": "bool",
+                        "example": false
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "positions"
+                }
+            },
+            "Representative": {
+                "title": "Representatives",
+                "description": "representatives model",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "factoring_id": {
+                        "title": "factoring_id",
+                        "description": "factoring_id",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "representative": {
+                        "title": "representative",
+                        "description": "representative",
+                        "type": "string",
+                        "format": "string",
+                        "example": "something"
+                    },
+                    "rep_phone": {
+                        "title": "rep_phone",
+                        "description": "rep_phone",
+                        "type": "integer",
+                        "format": "int",
+                        "example": 77123456
+                    },
+                    "rep_email": {
+                        "title": "rep_email",
+                        "description": "rep_email",
+                        "type": "string",
+                        "format": "string",
+                        "example": "email@e.com"
+                    },
+                    "payment_email": {
+                        "title": "payment_email",
+                        "description": "payment_email",
+                        "type": "string",
+                        "format": "string",
+                        "example": "email@e.com"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Representatives"
+                }
+            },
+            "Stop": {
+                "title": "Stop",
+                "description": "Stop model",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "load_id": {
+                        "title": "load_id",
+                        "description": "load_id",
+                        "type": "string",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "load_type": {
+                        "title": "load_type",
+                        "description": "load_type",
+                        "type": "integer",
+                        "format": "string",
+                        "example": "pick up or delivery"
+                    },
+                    "stop_description": {
+                        "title": "stop_description",
+                        "description": "stop_description",
+                        "type": "string",
+                        "format": "string",
+                        "example": "pick up info"
+                    },
+                    "trailer_type": {
+                        "title": "trailer_type",
+                        "description": "trailer_type",
+                        "type": "string",
+                        "format": "string",
+                        "example": "live load or drop trailer"
+                    },
+                    "facility": {
+                        "title": "facility",
+                        "description": "facility",
+                        "type": "string",
+                        "format": "string",
+                        "example": "*****"
+                    },
+                    "address": {
+                        "title": "address",
+                        "description": "address",
+                        "type": "string",
+                        "format": "string",
+                        "example": "alkarada 62 street"
+                    },
+                    "phone": {
+                        "title": "phone",
+                        "description": "phone",
+                        "type": "integer",
+                        "format": "integer",
+                        "example": 770123456
+                    },
+                    "appointment_type": {
+                        "title": "appointment_type",
+                        "description": "appointment_type",
+                        "type": "string",
+                        "format": "string",
+                        "example": "*****"
+                    },
+                    "driver_work": {
+                        "title": "driver_work",
+                        "description": "driver_work",
+                        "format": "string",
+                        "example": "*****"
+                    },
+                    "is_deleted": {
+                        "title": "is_deleted",
+                        "description": "is_deleted",
+                        "type": "boolean",
+                        "format": "bool",
+                        "example": false
+                    },
+                    "facility_note": {
+                        "title": "facility_note",
+                        "description": "facility_note",
+                        "format": "string",
+                        "example": "any thing about facility"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Stop"
+                }
+            },
+            "User": {
+                "title": "User",
+                "description": "User model",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "description": "ID",
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 1
+                    },
+                    "name": {
+                        "title": "name",
+                        "description": "name of the new User",
+                        "type": "string",
+                        "example": "Ahmed"
+                    },
+                    "email": {
+                        "title": "email",
+                        "description": "email of the new User",
+                        "type": "string",
+                        "example": "email@email.com"
+                    },
+                    "personal_phone": {
+                        "title": "personal_phone",
+                        "description": "personal_phone of the new User",
+                        "type": "string",
+                        "example": "0770123456"
+                    },
+                    "business_phone": {
+                        "title": "business_phone",
+                        "description": "business_phone of the new User",
+                        "type": "string",
+                        "example": "0770123456"
+                    },
+                    "password": {
+                        "title": "password",
+                        "description": "password of the new User",
+                        "type": "string",
+                        "example": "32134"
+                    },
+                    "type": {
+                        "title": "type",
+                        "description": "type of the new User",
+                        "type": "string",
+                        "example": "admin"
+                    },
+                    "address": {
+                        "title": "address",
+                        "description": "address of the new User",
+                        "type": "string",
+                        "example": "Baghdad/alkaradaa 62 Street"
+                    },
+                    "date": {
+                        "title": "date",
+                        "description": " signIn date or hiring date ",
+                        "type": "string",
+                        "example": "2/2/2020"
+                    },
+                    "status": {
+                        "title": "status",
+                        "description": "status of the new User",
+                        "type": "string",
+                        "example": "active"
+                    },
+                    "is_deleted": {
+                        "title": "is_deleted",
+                        "description": "is_deleted determain if the user deleted or not",
+                        "type": "boolean",
+                        "example": "true"
+                    },
+                    "note": {
+                        "title": "note",
+                        "description": "note about the user",
+                        "type": "boolean",
+                        "example": "true"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "User"
+                }
+            }
+        },
+        "securitySchemes": {
+            "api_key": {
+                "type": "apiKey",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Auth User",
+            "description": "API Endpoints of Auth User"
+        },
+        {
+            "name": "User",
+            "description": "API Endpoints of User"
+        },
+        {
+            "name": "Employee",
+            "description": "API Endpoints of Employee"
+        },
+        {
+            "name": "Customer",
+            "description": "API Endpoints of Customer"
+        },
+        {
+            "name": "Driver",
+            "description": "API Endpoints of Driver"
+        },
+        {
+            "name": "Load",
+            "description": "API Endpoints of Load"
+        },
+        {
+            "name": "Company",
+            "description": "API Endpoints of Company"
+        },
+        {
+            "name": "Factoring",
+            "description": "API Endpoints of Factoring"
+        },
+        {
+            "name": "Equipment",
+            "description": "API Endpoints of Equipment"
+        },
+        {
+            "name": "Position",
+            "description": "API Endpoints of positions"
+        },
+        {
+            "name": "Stop",
+            "description": "API Endpoints of stops"
+        },
+        {
+            "name": "Commodity",
+            "description": "API Endpoints of Commodity"
+        },
+        {
+            "name": "Representative",
+            "description": "API Endpoints of Representative"
+        }
+    ]
+}

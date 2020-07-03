@@ -20,6 +20,55 @@ class EmployeeController extends Controller
 
     }
     
+    /**
+     * @OA\Post(
+     *      path="/all/employees",
+     *      operationId="get all employees",
+     *      tags={"Employee"},
+     *      summary="get all employees",
+     *      description="get all Employee",
+     *      @OA\RequestBody(
+     *      @OA\MediaType(
+     *       mediaType="multipart/form-data",
+     *       @OA\Schema(
+     *         @OA\Property(
+     *           property="filter",
+     *           example="",
+     *           type="string",
+     *          ),
+     *         @OA\Property(
+     *           property="columns",
+     *           type="string",
+     *          ),
+     *         @OA\Property(
+     *           property="sort",
+     *           type="string",
+     *          ),
+     *         @OA\Property(
+     *           property="skip",
+     *           example="0",
+     *           type="string",
+     *          ),
+     *         @OA\Property(
+     *           property="take",
+     *           example="10",
+     *           type="string",
+     *          ),
+     *         ),
+     *       ),
+     *      ),
+     *      @OA\Response(
+     *          response=201,
+     *          description="Successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/User")
+     *       ),
+     *   security={
+     *         {
+     *             "api_key": {},
+     *         }
+     *     },
+     * )
+     */
     public function index(Request $request)
     {
 
@@ -44,6 +93,91 @@ class EmployeeController extends Controller
 
     }
 
+  /**
+     * @OA\Post(
+     *      path="/employees",
+     *      operationId="create employees",
+     *      tags={"Employee"},
+     *      summary="create employees",
+     *      description="create Employee",
+     *      @OA\RequestBody(
+     *      @OA\MediaType(
+     *       mediaType="multipart/form-data",
+     *       @OA\Schema(
+     *         @OA\Property(
+     *           property="name",
+     *           example="",
+     *           type="string",
+     *          ),
+     *         @OA\Property(
+     *           property="email",
+     *           type="string",
+     *          ),
+     *         @OA\Property(
+     *           property="personal_phone",
+     *           type="integer",
+     *          ),
+     *         @OA\Property(
+     *           property="business_phone",
+     *           type="integer",
+     *          ),
+     *         @OA\Property(
+     *           property="address",
+     *           type="string",
+     *          ),
+     *         @OA\Property(
+     *           property="date",
+     *           type="string",
+     *          ),
+     *         @OA\Property(
+     *           property="note",
+     *           type="string",
+     *          ),
+     *        @OA\Property(
+     *           property="status",
+     *           type="string",
+     *          ),
+     *       @OA\Property(
+     *           property="position_id",
+     *           type="integer",
+     *          ),
+     *       @OA\Property(
+     *           property="company_id",
+     *           type="integer",
+     *          ),
+     *       @OA\Property(
+     *           property="birth",
+     *           type="string",
+     *          ),
+     *       @OA\Property(
+     *           property="pay_rate_per_hour",
+     *           type="integer",
+     *          ),
+     *       @OA\Property(
+     *           property="education",
+     *           type="string",
+     *          ),
+     *       @OA\Property(
+     *           property="profile_image",
+     *           type="file",
+     *          ),
+     *         ),
+     *       ),
+     *      ),
+     *      @OA\Response(
+     *          response=201,
+     *          description="Successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/User")
+     *       ),
+     *   security={
+     *         {
+     *             "api_key": {},
+     *         }
+     *     },
+     * )
+     */
+
+
     public function store(Request $request)
     {
         $this->validateRequest($request);
@@ -51,7 +185,35 @@ class EmployeeController extends Controller
         return Utilities::wrap($response);
        
     }
-    
+
+     /**
+     * @OA\Post(
+     *      path="/employees/{id}",
+     *      operationId="getEmployeeByID",
+     *      tags={"Employee"},
+     *      summary="Get employee By ID",
+     *      description="Returns employee full info",
+     *     @OA\Parameter(
+     *          name="id",
+     *          description="employeeID",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/User")
+     *       ),
+     *      security={
+     *         {
+     *             "api_key": {},
+     *         }
+     *     },
+     *     )
+     */
     public function show($id)
     {
         //  (Gate::authorize('allow_admin', $this->user))
@@ -60,6 +222,98 @@ class EmployeeController extends Controller
         return Utilities::wrap($response);
     }
 
+    /**
+     * @OA\Post(
+     *      path="/update/employees/{id}",
+     *      operationId="update employees",
+     *      tags={"Employee"},
+     *      summary="update employees",
+     *      description="update employees",
+     *     @OA\Parameter(
+     *          name="id",
+     *          description="employeeID",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\RequestBody(
+     *      @OA\MediaType(
+     *       mediaType="multipart/form-data",
+     *       @OA\Schema(
+     *         @OA\Property(
+     *           property="name",
+     *           example="",
+     *           type="string",
+     *          ),
+     *         @OA\Property(
+     *           property="email",
+     *           type="string",
+     *          ),
+     *         @OA\Property(
+     *           property="personal_phone",
+     *           type="integer",
+     *          ),
+     *         @OA\Property(
+     *           property="business_phone",
+     *           type="integer",
+     *          ),
+     *         @OA\Property(
+     *           property="address",
+     *           type="string",
+     *          ),
+     *         @OA\Property(
+     *           property="date",
+     *           type="string",
+     *          ),
+     *         @OA\Property(
+     *           property="note",
+     *           type="string",
+     *          ),
+     *        @OA\Property(
+     *           property="status",
+     *           type="string",
+     *          ),
+     *       @OA\Property(
+     *           property="position_id",
+     *           type="integer",
+     *          ),
+     *       @OA\Property(
+     *           property="company_id",
+     *           type="integer",
+     *          ),
+     *       @OA\Property(
+     *           property="birth",
+     *           type="string",
+     *          ),
+     *       @OA\Property(
+     *           property="pay_rate_per_hour",
+     *           type="integer",
+     *          ),
+     *       @OA\Property(
+     *           property="education",
+     *           type="string",
+     *          ),
+     *       @OA\Property(
+     *           property="profile_image",
+     *           type="file",
+     *          ),
+     *         ),
+     *       ),
+     *      ),
+     *      @OA\Response(
+     *          response=201,
+     *          description="Successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/User")
+     *       ),
+     *   security={
+     *         {
+     *             "api_key": {},
+     *         }
+     *     },
+     * )
+     */
     public function update(Request $request,Employee $id)
     {
         $this->validateRequest($request,'sometimes|');
@@ -67,12 +321,82 @@ class EmployeeController extends Controller
         return Utilities::wrap($response);
     }
 
+    /**
+     * @OA\Post(
+     *      path="/update/employees/{id}/status",
+     *      operationId="updateEmployee status",
+     *      tags={"Employee"},
+     *      summary="update employee status ",
+     *      description="update employee status",
+     *     @OA\Parameter(
+     *          name="id",
+     *          description="employeeID",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *   @OA\RequestBody(
+     *      @OA\MediaType(
+     *       mediaType="multipart/form-data",
+     *       @OA\Schema(
+     *         @OA\Property(
+     *           property="status",
+     *           example="",
+     *           type="string",
+     *          ),
+     *         ),
+     *       ),
+     *      ),
+     *      @OA\Response(
+     *          response=201,
+     *          description="Successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/User")
+     *       ),
+     *   security={
+     *         {
+     *             "api_key": {},
+     *         }
+     *     },
+     * )
+     */
+
     public function updateStatus(Request $request , $id)
     {
         request()->validate(['status' => 'required|string']);
         $response = $this->EmployeeRepository->updateStatus($id ,array('status' => $request->status));
         return Utilities::wrap($response);
     }
+
+    /**
+     * @OA\Delete(
+     *      path="delete/employees/{id}",
+     *      operationId="deleteEmployee",
+     *      tags={"Employee"},
+     *      summary="delete employee ",
+     *      description="delete employee",
+     *     @OA\Parameter(
+     *          name="id",
+     *          description="employeeID",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/User")
+     *       ),
+     *      security={
+     *         {
+     *             "api_key": {},
+     *         }
+     *     },
+     *     )
+     */
 
     public function destroy($id)
     {

@@ -16,7 +16,7 @@ class DriverRepository extends BaseRepository {
 
     public function getList($conditions, $columns, $sort, $skip, $take)
     {
-        $result = Driver::where('is_deleted', '=', 0)->where($conditions);
+        $result = Driver::where($conditions);
 
         if(!is_null($columns))
             $result = $result->select($columns);
@@ -137,7 +137,7 @@ class DriverRepository extends BaseRepository {
             'address' => $values['address'] ,
             'date' => $values['date'] ,
             'note' => $values['note'] ,
-            'type' => 'driver' ,
+            'type' => $user->first()->type  ,
         ]);
         return array('msg'=>true);
     }

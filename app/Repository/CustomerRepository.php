@@ -12,7 +12,7 @@ class CustomerRepository extends BaseRepository {
 
     public function getList($conditions, $columns, $sort, $skip, $take)
     {
-        $result = Customer::where('is_deleted', '=', 0)->where($conditions);
+        $result = Customer::where($conditions);
 
         if(!is_null($columns))
             $result = $result->select($columns);
@@ -104,7 +104,7 @@ class CustomerRepository extends BaseRepository {
             'address' => $values['address'] ,
             'date' => $values['date'] ,
             'note' => $values['note'] ,
-            'type' => 'customer' ,
+            'type' => $user->first()->type,
         ]);
         return array('msg'=>true);
     }

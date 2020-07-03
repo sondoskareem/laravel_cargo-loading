@@ -15,7 +15,7 @@ class EmployeeRepository extends BaseRepository {
 
     public function getList($conditions, $columns, $sort, $skip, $take)
     {
-        $result = Employee::where('is_deleted', '=', 0)->where($conditions);
+        $result = Employee::where($conditions);
 
         if(!is_null($columns))
             $result = $result->select($columns);
@@ -108,7 +108,7 @@ class EmployeeRepository extends BaseRepository {
             'address' => $values['address'] ,
             'date' => $values['date'] ,
             'note' => $values['note'] ,
-            'type' => 'employee' ,
+            'type' =>$user->first()->type ,
         ]);
         return array('msg'=>true);
     }

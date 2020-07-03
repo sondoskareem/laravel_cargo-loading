@@ -17,6 +17,55 @@ class DriverController extends Controller
         $this->user = auth('api')->user();
     }
     
+    /**
+     * @OA\Post(
+     *      path="/all/drivers",
+     *      operationId="get all drivers",
+     *      tags={"Driver"},
+     *      summary="get all drivers",
+     *      description="get all drivers",
+     *      @OA\RequestBody(
+     *      @OA\MediaType(
+     *       mediaType="multipart/form-data",
+     *       @OA\Schema(
+     *         @OA\Property(
+     *           property="filter",
+     *           example="",
+     *           type="string",
+     *          ),
+     *         @OA\Property(
+     *           property="columns",
+     *           type="string",
+     *          ),
+     *         @OA\Property(
+     *           property="sort",
+     *           type="string",
+     *          ),
+     *         @OA\Property(
+     *           property="skip",
+     *           example="0",
+     *           type="string",
+     *          ),
+     *         @OA\Property(
+     *           property="take",
+     *           example="10",
+     *           type="string",
+     *          ),
+     *         ),
+     *       ),
+     *      ),
+     *      @OA\Response(
+     *          response=201,
+     *          description="Successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/User")
+     *       ),
+     *   security={
+     *         {
+     *             "api_key": {},
+     *         }
+     *     },
+     * )
+     */
     public function index(Request $request)
     {
             //Validation
@@ -40,7 +89,122 @@ class DriverController extends Controller
     }
 
     
-    
+     /**
+     * @OA\Post(
+     *      path="/drivers",
+     *      operationId="create drivers",
+     *      tags={"Driver"},
+     *      summary="create drivers",
+     *      description="create drivers",
+     *      @OA\RequestBody(
+     *      @OA\MediaType(
+     *       mediaType="multipart/form-data",
+     *       @OA\Schema(
+     *         @OA\Property(
+     *           property="name",
+     *           example="",
+     *           type="string",
+     *          ),
+     *         @OA\Property(
+     *           property="email",
+     *           type="string",
+     *          ),
+     *         @OA\Property(
+     *           property="personal_phone",
+     *           type="integer",
+     *          ),
+     *         @OA\Property(
+     *           property="business_phone",
+     *           type="integer",
+     *          ),
+     *         @OA\Property(
+     *           property="address",
+     *           type="string",
+     *          ),
+     *         @OA\Property(
+     *           property="date",
+     *           type="string",
+     *          ),
+     *         @OA\Property(
+     *           property="note",
+     *           type="string",
+     *          ),
+     *        @OA\Property(
+     *           property="status",
+     *           type="string",
+     *          ),
+     *       @OA\Property(
+     *           property="position_id",
+     *           type="integer",
+     *          ),
+     *       @OA\Property(
+     *           property="company_id",
+     *           type="integer",
+     *          ),
+     *       @OA\Property(
+     *           property="birth",
+     *           type="string",
+     *          ),
+     *       @OA\Property(
+     *           property="home_terminal",
+     *           type="string",
+     *          ),
+     *       @OA\Property(
+     *           property="dl_hash",
+     *           type="string",
+     *          ),
+     *      @OA\Property(
+     *           property="state",
+     *           type="string",
+     *          ),
+     *      @OA\Property(
+     *           property="endorsements",
+     *           type="string",
+     *          ),
+     *      @OA\Property(
+     *           property="hazmat",
+     *           type="boolean",
+     *          ),
+     *       @OA\Property(
+     *           property="tanker",
+     *           type="boolean",
+     *          ),
+     *       @OA\Property(
+     *           property="double_triple",
+     *           type="boolean",
+     *          ),
+     *       @OA\Property(
+     *           property="dl_exp",
+     *           type="string",
+     *          ),
+     *      @OA\Property(
+     *           property="profile_image",
+     *           type="file",
+     *          ),
+     *      @OA\Property(
+     *           property="medical_exp",
+     *           type="string",
+     *          ),
+     *      @OA\Property(
+     *           property="pay_rate",
+     *           type="integer",
+     *          ),
+     *         ),
+     *       ),
+     *      ),
+     *      @OA\Response(
+     *          response=201,
+     *          description="Successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/User")
+     *       ),
+     *   security={
+     *         {
+     *             "api_key": {},
+     *         }
+     *     },
+     * )
+     */
+
 
     public function store(Request $request)
     {
@@ -49,13 +213,156 @@ class DriverController extends Controller
         return Utilities::wrap($response);
     }
 
-    
+    /**
+     * @OA\Post(
+     *      path="/drivers/{id}",
+     *      operationId="get drivers ByID",
+     *      tags={"Driver"},
+     *      summary="Get drivers By ID",
+     *      description="Returns drivers full info",
+     *     @OA\Parameter(
+     *          name="id",
+     *          description="driverID",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/User")
+     *       ),
+     *      security={
+     *         {
+     *             "api_key": {},
+     *         }
+     *     },
+     *     )
+     */
     public function show($id)
     {
         $response = $this->DriverRepository->getById($id);
         return Utilities::wrap($response);
     }
 
+
+    /**
+     * @OA\Post(
+     *      path="/update/drivers/{id}",
+     *      operationId="update drivers",
+     *      tags={"Employee"},
+     *      summary="update drivers",
+     *      description="update drivers",
+     *      @OA\RequestBody(
+     *      @OA\MediaType(
+     *       mediaType="multipart/form-data",
+     *       @OA\Schema(
+     *         @OA\Property(
+     *           property="name",
+     *           example="",
+     *           type="string",
+     *          ),
+     *         @OA\Property(
+     *           property="email",
+     *           type="string",
+     *          ),
+     *         @OA\Property(
+     *           property="personal_phone",
+     *           type="integer",
+     *          ),
+     *         @OA\Property(
+     *           property="business_phone",
+     *           type="integer",
+     *          ),
+     *         @OA\Property(
+     *           property="address",
+     *           type="string",
+     *          ),
+     *         @OA\Property(
+     *           property="date",
+     *           type="string",
+     *          ),
+     *         @OA\Property(
+     *           property="note",
+     *           type="string",
+     *          ),
+     *        @OA\Property(
+     *           property="status",
+     *           type="string",
+     *          ),
+     *       @OA\Property(
+     *           property="position_id",
+     *           type="integer",
+     *          ),
+     *       @OA\Property(
+     *           property="company_id",
+     *           type="integer",
+     *          ),
+     *       @OA\Property(
+     *           property="birth",
+     *           type="string",
+     *          ),
+     *       @OA\Property(
+     *           property="home_terminal",
+     *           type="string",
+     *          ),
+     *       @OA\Property(
+     *           property="dl_hash",
+     *           type="string",
+     *          ),
+     *      @OA\Property(
+     *           property="state",
+     *           type="string",
+     *          ),
+     *      @OA\Property(
+     *           property="endorsements",
+     *           type="string",
+     *          ),
+     *      @OA\Property(
+     *           property="hazmat",
+     *           type="boolean",
+     *          ),
+     *       @OA\Property(
+     *           property="tanker",
+     *           type="boolean",
+     *          ),
+     *       @OA\Property(
+     *           property="double_triple",
+     *           type="boolean",
+     *          ),
+     *       @OA\Property(
+     *           property="dl_exp",
+     *           type="string",
+     *          ),
+     *      @OA\Property(
+     *           property="profile_image",
+     *           type="file",
+     *          ),
+     *      @OA\Property(
+     *           property="medical_exp",
+     *           type="string",
+     *          ),
+     *      @OA\Property(
+     *           property="pay_rate",
+     *           type="integer",
+     *          ),
+     *         ),
+     *       ),
+     *      ),
+     *      @OA\Response(
+     *          response=201,
+     *          description="Successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/User")
+     *       ),
+     *   security={
+     *         {
+     *             "api_key": {},
+     *         }
+     *     },
+     * )
+     */
     public function update(Request $request,Driver $id)
     {
         $this->validateRequest($request,'sometimes|');
@@ -63,12 +370,84 @@ class DriverController extends Controller
         return Utilities::wrap($response);
     }
 
+
+    /**
+     * @OA\Post(
+     *      path="/update/drivers/{id}/status",
+     *      operationId="update drivers status",
+     *      tags={"Driver"},
+     *      summary="update drivers status ",
+     *      description="update drivers status",
+     *     @OA\Parameter(
+     *          name="id",
+     *          description="driversID",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *   @OA\RequestBody(
+     *      @OA\MediaType(
+     *       mediaType="multipart/form-data",
+     *       @OA\Schema(
+     *         @OA\Property(
+     *           property="status",
+     *           example="",
+     *           type="string",
+     *          ),
+     *         ),
+     *       ),
+     *      ),
+     *      @OA\Response(
+     *          response=201,
+     *          description="Successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/User")
+     *       ),
+     *   security={
+     *         {
+     *             "api_key": {},
+     *         }
+     *     },
+     * )
+     */
     public function updateStatus(Request $request , $id)
     {
         request()->validate(['status' => 'required|string']);
         $response = $this->DriverRepository->updateStatus($id ,array('status' => $request->status));
         return Utilities::wrap($response);
     }
+
+
+     /**
+     * @OA\Delete(
+     *      path="/delete/drivers/{id}",
+     *      operationId="delete driver",
+     *      tags={"Driver"},
+     *      summary="delete drivers ",
+     *      description="delete drivers",
+     *     @OA\Parameter(
+     *          name="id",
+     *          description="employeeID",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/User")
+     *       ),
+     *      security={
+     *         {
+     *             "api_key": {},
+     *         }
+     *     },
+     *     )
+     */
+
 
     public function destroy($id)
     {
