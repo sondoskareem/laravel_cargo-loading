@@ -48,7 +48,7 @@ class EmployeeRepository extends BaseRepository {
             $filePath = $folder . $name. '.' . $image->getClientOriginalExtension();
             $this->uploadOne($image, $folder, 'public', $name);
 
-            
+
 
         $user = User::create([
             'name' =>$data['name'],
@@ -75,47 +75,17 @@ class EmployeeRepository extends BaseRepository {
     }
 
     public function update($employee, $values){
-        $user = $employee->user()->get();
 
-        $values['name'] ?: $values['name'] = $user->first()->name;
-        $values['email'] ?: $values['email'] = $user->first()->email;
-        $values['status'] ?: $values['status'] = $user->first()->status;
-        $values['personal_phone'] ?: $values['personal_phone'] = $user->first()->personal_phone;
-        $values['business_phone'] ?: $values['business_phone'] = $user->first()->business_phone;
-        $values['address'] ?: $values['address'] = $user->first()->address;
-        $values['date'] ?: $values['date'] = $user->first()->date;
-        $values['note'] ?: $values['note'] = $user->first()->note;
+        $employee->update($values);
 
-        $values['position_id'] ?: $values['position_id'] = $employee->position_id;
-        $values['company_id'] ?: $values['company_id'] = $employee->company_id;
-        $values['birth'] ?: $values['birth'] = $employee->birth;
-        $values['pay_rate_per_hour'] ?: $values['pay_rate_per_hour'] = $employee->pay_rate_per_hour;
-        $values['education'] ?: $values['education'] = $employee->education;
+        $employee->user()->update($values);
 
-        $employee = tap($employee)->update([
-            'position_id' => $values['position_id'],
-            'company_id' => $values['company_id'] ,
-            'birth' => $values['birth'] ,
-            'pay_rate_per_hour' => $values['pay_rate_per_hour'],
-            'education' => $values['education'] 
-        ]);
-        $user = tap($user->first())->update([
-            'name' => $values['name'],
-            'email' => $values['email'] ,
-            'status' => $values['status'] ,
-            'personal_phone' => $values['personal_phone'],
-            'business_phone' => $values['business_phone'] ,
-            'address' => $values['address'] ,
-            'date' => $values['date'] ,
-            'note' => $values['note'] ,
-            'type' =>$user->first()->type ,
-        ]);
         return array('msg'=>true);
     }
-    
+
     public function updateStatus($id, $values){
         $employee = Employee::findorFail($id);
-        $employee = tap($employee->user())->update($values);
+        $employee->user()->update($values);
         return array('msg'=>true);
     }
 }

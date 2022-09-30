@@ -13,34 +13,16 @@ class CommodityRepository extends BaseRepository {
 
 
     public function create($data){
-            $commodity = Commodity::create([
-                'stop_id' =>$data['stop_id'],
-                'description' =>$data['description'],
-                'Packaging' =>$data['Packaging'],
-                'quantity' =>$data['quantity'],
-                'weight' =>$data['weight'],
-            ]);
+            $commodity = Commodity::create($values);
         return $commodity;
     }
 
     public function update($commodity, $values){
-        $values['stop_id'] ?: $values['stop_id'] = $commodity->stop_id;
-        $values['description'] ?: $values['description'] = $commodity->description;
-        $values['Packaging'] ?: $values['Packaging'] = $commodity->Packaging;
-        $values['quantity'] ?: $values['quantity'] = $commodity->quantity;
-        $values['weight'] ?: $values['weight'] = $commodity->weight;
 
-        $commodity = tap($commodity)->update([
-            'stop_id' => $values['stop_id'],
-            'description' => $values['description'],
-            'Packaging' => $values['Packaging'],
-            'quantity' => $values['quantity'],
-            'weight' => $values['weight'],
-            
-        ]);
+        $commodity = tap($commodity)->update($values);
         return $commodity;
     }
-    
+
     public function destroy($commodity ,$values){
        $commodity['is_deleted'] =$values['is_deleted'];
         $commodity->save();

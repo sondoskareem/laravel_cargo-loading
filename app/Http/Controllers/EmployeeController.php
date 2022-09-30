@@ -19,7 +19,7 @@ class EmployeeController extends Controller
         $this->user = auth('api')->user();
 
     }
-    
+
     /**
      * @OA\Post(
      *      path="/all/employees",
@@ -33,16 +33,28 @@ class EmployeeController extends Controller
      *       @OA\Schema(
      *         @OA\Property(
      *           property="filter",
-     *           example="",
-     *           type="string",
+     *           type="array",
+     *         @OA\Items(
+     *          type="array",
+     *          @OA\Items()
+     *         ),
+     *          example={{"education","=","any"} , {"education","=","any"}},
+     *
      *          ),
      *         @OA\Property(
      *           property="columns",
-     *           type="string",
+     *           type="array",
+     *        @OA\Items(
+     *          type="array",
+     *          @OA\Items()
+     *         ),
+     *          example={"id", "pay_rate_per_hour", "education"},
+     *
      *          ),
      *         @OA\Property(
      *           property="sort",
-     *           type="string",
+     *           type="object",
+     *           example={"column":"id","dir":"desc"},
      *          ),
      *         @OA\Property(
      *           property="skip",
@@ -77,17 +89,17 @@ class EmployeeController extends Controller
                 'skip' => 'Integer',
                 'take' => 'required|Integer'
             ]);
-    
+
             //Param
             $conditions = json_decode($request->filter, true);
             $columns = json_decode($request->columns, true);
             $sort = json_decode($request->sort);
             $skip = $request->skip;
             $take = $request->take;
-    
+
             //Processing
             $response = $this->EmployeeRepository->getList($conditions, $columns, $sort, $skip, $take);
-    
+
             // Response
             return Utilities::wrap($response);
 
@@ -183,7 +195,7 @@ class EmployeeController extends Controller
         $this->validateRequest($request);
         $response = $this->EmployeeRepository->create($request);
         return Utilities::wrap($response);
-       
+
     }
 
      /**
@@ -314,10 +326,10 @@ class EmployeeController extends Controller
      *     },
      * )
      */
-    public function update(Request $request,Employee $id)
+    public function update(Request $request,Employee $emp)
     {
         $this->validateRequest($request,'sometimes|');
-        $response = $this->EmployeeRepository->update( $id  ,$request);
+        $response = $this->EmployeeRepository->update( $emp  ,$request->all());
         return Utilities::wrap($response);
     }
 
@@ -403,12 +415,12 @@ class EmployeeController extends Controller
         $response = $this->EmployeeRepository->updateStatus($id ,array('is_deleted' => 1));
         return Utilities::wrap($response);
     }
-    
+
     private function validateRequest( $request, $options = ''  ){
 
         return $this->validate($request,[
-            'name' => $options."required|string|unique:users,name,{$this->user->id}", 
-            'email' => $options."required|email|unique:users,email,{$this->user->id}", 
+            'name' => $options."required|string|unique:users,name,{$this->user->id}",
+            'email' => $options."required|email|unique:users,email,{$this->user->id}",
             'personal_phone' => $options.'required|integer|min:6',
             'business_phone' => $options.'required|integer|min:6',
             'address' => $options.'required|string',

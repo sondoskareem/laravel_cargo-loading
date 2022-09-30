@@ -30,33 +30,15 @@ class RepresentativeRepository extends BaseRepository {
     }
 
     public function create($data){
-            $representative = Representative::create([
-                'factoring_id' =>$data['factoring_id'],
-                'representative' =>$data['representative'],
-                'rep_phone' =>$data['rep_phone'],
-                'rep_email' =>$data['rep_email'],
-                'payment_email' =>$data['payment_email'],
-            ]);
+            $representative = Representative::create($data);
         return $representative;
     }
 
     public function update($representative, $values){
-        $values['factoring_id'] ?: $values['factoring_id'] = $representative->factoring_id;
-        $values['representative'] ?: $values['representative'] = $representative->representative;
-        $values['rep_phone'] ?: $values['rep_phone'] = $representative->rep_phone;
-        $values['rep_email'] ?: $values['rep_email'] = $representative->rep_email;
-        $values['payment_email'] ?: $values['payment_email'] = $representative->payment_email;
-
-        $representative = tap($representative)->update([
-            'factoring_id' => $values['factoring_id'],
-            'representative' => $values['representative'],
-            'rep_phone' => $values['rep_phone'],
-            'rep_email' => $values['rep_email'],
-            'payment_email' => $values['payment_email'],
-        ]);
+        $representative = tap($representative)->update($values);
         return $representative;
     }
-    
+
     public function destroy($representative ,$values){
        $representative['is_deleted'] =$values['is_deleted'];
         $representative->save();

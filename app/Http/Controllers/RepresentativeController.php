@@ -17,7 +17,7 @@ class RepresentativeController extends Controller
         $this->middleware('auth:api');
         $this->user = auth('api')->user();
     }
-    
+
     public function index(Request $request)
     {
             //Validation
@@ -25,17 +25,17 @@ class RepresentativeController extends Controller
                 'skip' => 'Integer',
                 'take' => 'required|Integer'
             ]);
-    
+
             //Param
             $conditions = json_decode($request->filter, true);
             $columns = json_decode($request->columns, true);
             $sort = json_decode($request->sort);
             $skip = $request->skip;
             $take = $request->take;
-    
+
             //Processing
             $response = $this->RepresentativeRepository->getList($conditions, $columns, $sort, $skip, $take);
-    
+
             // Response
             return Utilities::wrap($response);
     }
@@ -48,14 +48,14 @@ class RepresentativeController extends Controller
     }
 
 
-    
-    public function update(Request $request,Representative $id) { 
+
+    public function update(Request $request,Representative $id) {
         $this->validateRequest($request,'sometimes|');
-        $response = $this->RepresentativeRepository->update($id,$request);
+        $response = $this->RepresentativeRepository->update($id,$request->all());
         return Utilities::wrap($response);
     }
-    
-    
+
+
     public function destroy(Representative $id)
     {
         $response = $this->RepresentativeRepository->destroy($id ,array('is_deleted' => true));

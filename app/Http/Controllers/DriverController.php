@@ -16,7 +16,7 @@ class DriverController extends Controller
         $this->middleware('auth:api');
         $this->user = auth('api')->user();
     }
-    
+
     /**
      * @OA\Post(
      *      path="/all/drivers",
@@ -28,18 +28,30 @@ class DriverController extends Controller
      *      @OA\MediaType(
      *       mediaType="multipart/form-data",
      *       @OA\Schema(
-     *         @OA\Property(
+     *          @OA\Property(
      *           property="filter",
-     *           example="",
-     *           type="string",
+     *           type="array",
+     *         @OA\Items(
+     *          type="array",
+     *          @OA\Items()
+     *         ),
+     *          example={{"endorsements","=","any"} , {"user_id","=","2"}},
+     *
      *          ),
      *         @OA\Property(
      *           property="columns",
-     *           type="string",
+     *           type="array",
+     *        @OA\Items(
+     *          type="array",
+     *          @OA\Items()
+     *         ),
+     *          example={"id", "endorsements", "dl_exp"},
+     *
      *          ),
      *         @OA\Property(
      *           property="sort",
-     *           type="string",
+     *           type="object",
+     *           example={"column":"id","dir":"desc"},
      *          ),
      *         @OA\Property(
      *           property="skip",
@@ -73,22 +85,22 @@ class DriverController extends Controller
                 'skip' => 'Integer',
                 'take' => 'required|Integer'
             ]);
-    
+
             //Param
             $conditions = json_decode($request->filter, true);
             $columns = json_decode($request->columns, true);
             $sort = json_decode($request->sort);
             $skip = $request->skip;
             $take = $request->take;
-    
+
             //Processing
             $response = $this->DriverRepository->getList($conditions, $columns, $sort, $skip, $take);
-    
+
             // Response
             return Utilities::wrap($response);
     }
 
-    
+
      /**
      * @OA\Post(
      *      path="/drivers",
@@ -163,15 +175,15 @@ class DriverController extends Controller
      *          ),
      *      @OA\Property(
      *           property="hazmat",
-     *           type="boolean",
+     *           type="integer",
      *          ),
      *       @OA\Property(
      *           property="tanker",
-     *           type="boolean",
+     *           type="integer",
      *          ),
      *       @OA\Property(
      *           property="double_triple",
-     *           type="boolean",
+     *           type="integer",
      *          ),
      *       @OA\Property(
      *           property="dl_exp",
@@ -252,9 +264,18 @@ class DriverController extends Controller
      * @OA\Post(
      *      path="/update/drivers/{id}",
      *      operationId="update drivers",
-     *      tags={"Employee"},
+     *      tags={"Driver"},
      *      summary="update drivers",
      *      description="update drivers",
+     *     @OA\Parameter(
+     *          name="id",
+     *          description="driver ID",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
      *      @OA\RequestBody(
      *      @OA\MediaType(
      *       mediaType="multipart/form-data",
@@ -366,7 +387,7 @@ class DriverController extends Controller
     public function update(Request $request,Driver $id)
     {
         $this->validateRequest($request,'sometimes|');
-        $response = $this->DriverRepository->update( $id  ,$request);
+        $response = $this->DriverRepository->update( $id  ,$request->all());
         return Utilities::wrap($response);
     }
 
@@ -428,7 +449,7 @@ class DriverController extends Controller
      *      description="delete drivers",
      *     @OA\Parameter(
      *          name="id",
-     *          description="employeeID",
+     *          description="driver ID",
      *          required=true,
      *          in="path",
      *          @OA\Schema(
@@ -459,8 +480,8 @@ class DriverController extends Controller
     private function validateRequest( $request, $options = ''  ){
 
         return $this->validate($request,[
-            'name' => $options."required|string|unique:users,name,{$this->user->id}", 
-            'email' => $options."required|email|unique:users,email,{$this->user->id}", 
+            'name' => $options."required|string|unique:users,name,{$this->user->id}",
+            'email' => $options."required|email|unique:users,email,{$this->user->id}",
             'personal_phone' => $options.'required|integer|min:6',
             'business_phone' => $options.'required|integer|min:6',
             'address' => $options.'required|string',

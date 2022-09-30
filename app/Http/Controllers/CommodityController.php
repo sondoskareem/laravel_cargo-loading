@@ -16,26 +16,26 @@ class CommodityController extends Controller
         $this->middleware('auth:api');
         $this->user = auth('api')->user();
     }
-    
+
 
     public function store(Request $request)
     {
         $this->validateRequest($request);
         $response = $this->CommodityRepository->create($request);
         return Utilities::wrap($response);
-    //  return 'dd';  
+    //  return 'dd';
     }
 
-    
-    
-    public function update(Request $request,Commodity $id) { 
+
+
+    public function update(Request $request,Commodity $id) {
         $this->validateRequest($request,'sometimes|');
-        $response = $this->CommodityRepository->update($id,$request);
+        $response = $this->CommodityRepository->update($id,$request->all());
         return Utilities::wrap($response);
     }
 
-    
-    
+
+
     public function destroy(Commodity $id)
     {
         $response = $this->CommodityRepository->destroy($id ,array('is_deleted' => true));

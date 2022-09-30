@@ -16,7 +16,7 @@ class StopsController extends Controller
         $this->middleware('auth:api');
         $this->user = auth('api')->user();
     }
-    
+
     public function index(Request $request)
     {
             //Validation
@@ -24,50 +24,50 @@ class StopsController extends Controller
                 'skip' => 'Integer',
                 'take' => 'required|Integer'
             ]);
-    
+
             //Param
             $conditions = json_decode($request->filter, true);
             $columns = json_decode($request->columns, true);
             $sort = json_decode($request->sort);
             $skip = $request->skip;
             $take = $request->take;
-    
+
             //Processing
             $response = $this->StopRepository->getList($conditions, $columns, $sort, $skip, $take);
-    
+
             // Response
             return Utilities::wrap($response);
     }
 
-    
-    
+
+
 
     public function store(Request $request)
     {
         $this->validateRequest($request);
         $response = $this->StopRepository->create($request);
         return Utilities::wrap($response);
-    //  return 'dd';  
+    //  return 'dd';
     }
 
-    
+
     public function show($id)
     {
         $response = $this->StopRepository->getById($id);
         return Utilities::wrap($response);
     }
 
-   
 
-    
-    public function update(Request $request,Stop $id) { 
+
+
+    public function update(Request $request,Stop $id) {
         $this->validateRequest($request,'sometimes|');
-        $response = $this->StopRepository->update($id,$request);
+        $response = $this->StopRepository->update($id,$request->all());
         return Utilities::wrap($response);
     }
 
-    
-    
+
+
     public function destroy(Stop $id)
     {
         $response = $this->StopRepository->destroy($id ,array('is_deleted' => true));

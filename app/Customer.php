@@ -12,8 +12,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $mc_number
  * @property string $dot_number
  * @property string $website
- * @property bool $invoive_factoring_approvment
- * @property bool $invoice_mail
+ * @property boolean $invoive_factoring_approvment
+ * @property boolean $invoice_mail
  * @property int $personal_fax
  * @property int $business_fax
  *
@@ -100,11 +100,11 @@ class Customer extends Model
      * @OA\Property(
      *     title="invoive_factoring_approvment",
      *     description="invoive_factoring_approvment",
-     *     format="bool",
-     *     example=false
+     *     format="boolean",
+     *     example=1
      * )
      *
-     * @var bool
+     * @var boolean
      */
     private $invoive_factoring_approvment;
 
@@ -112,11 +112,11 @@ class Customer extends Model
      * @OA\Property(
      *     title="invoice_mail",
      *     description="invoice_mail",
-     *     format="bool",
-     *     example=false
+     *     format="boolean",
+     *     example=0
      * )
      *
-     * @var bool
+     * @var boolean
      */
     private $invoice_mail;
 

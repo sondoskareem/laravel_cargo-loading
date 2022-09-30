@@ -22,6 +22,42 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
+
+      /**
+     * @OA\Post(
+     *      path="/auth/login",
+     *      operationId="Login",
+     *      tags={"Auth User"},
+     *      summary="Login",
+     *      description="Login",
+     *      @OA\RequestBody(
+     *      @OA\MediaType(
+     *       mediaType="multipart/form-data",
+     *       @OA\Schema(
+     *         @OA\Property(
+     *           property="name",
+     *           example="admin",
+     *           type="string",
+     *          ),
+     *         @OA\Property(
+     *           property="password",
+     *           type="string",
+     *          ),
+     *         ),
+     *       ),
+     *      ),
+     *      @OA\Response(
+     *          response=201,
+     *          description="Successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/User")
+     *       ),
+     *   security={
+     *         {
+     *             "api_key": {},
+     *         }
+     *     },
+     * )
+     */
     public function login()
     {
         $credentials = request(['name', 'password']);
@@ -33,6 +69,7 @@ class AuthController extends Controller
         return $this->respondWithToken($token);
     }
 
+    
     /**
      * Get the authenticated User.
      *
@@ -47,6 +84,26 @@ class AuthController extends Controller
      * Log the user out (Invalidate the token).
      *
      * @return \Illuminate\Http\JsonResponse
+     */
+
+     /**
+     * @OA\Post(
+     *      path="/auth/logout",
+     *      operationId="logout",
+     *      tags={"Auth User"},
+     *      summary="logout",
+     *      description="logout",
+     *      @OA\Response(
+     *          response=201,
+     *          description="Successful operation",
+     *          @OA\JsonContent(ref="#/components/schemas/User")
+     *       ),
+     *   security={
+     *         {
+     *             "api_key": {},
+     *         }
+     *     },
+     * )
      */
     public function logout()
     {

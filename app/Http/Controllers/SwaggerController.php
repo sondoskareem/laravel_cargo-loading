@@ -27,10 +27,7 @@ class SwaggerController extends Controller
      *     name="Auth User",
      *     description="API Endpoints of Auth User"
      * )
-     * @OA\Tag(
-     *     name="User",
-     *     description="API Endpoints of User"
-     * )
+    
      *  @OA\Tag(
      *     name="Employee",
      *     description="API Endpoints of Employee"

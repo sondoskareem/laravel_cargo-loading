@@ -18,6 +18,472 @@
         }
     ],
     "paths": {
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "Auth User"
+                ],
+                "summary": "Login",
+                "description": "Login",
+                "operationId": "Login",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "admin"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/auth/logout": {
+            "post": {
+                "tags": [
+                    "Auth User"
+                ],
+                "summary": "logout",
+                "description": "logout",
+                "operationId": "logout",
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/all/customers": {
+            "post": {
+                "tags": [
+                    "Customer"
+                ],
+                "summary": "get all customers",
+                "description": "get all customers",
+                "operationId": "get all customers",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "filter": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "example": [
+                                            [
+                                                "mc_number",
+                                                "=",
+                                                2
+                                            ],
+                                            [
+                                                "user_id",
+                                                "=",
+                                                "2"
+                                            ]
+                                        ]
+                                    },
+                                    "columns": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "example": [
+                                            "id",
+                                            "website",
+                                            "mc_number"
+                                        ]
+                                    },
+                                    "sort": {
+                                        "type": "object",
+                                        "example": {
+                                            "column": "id",
+                                            "dir": "desc"
+                                        }
+                                    },
+                                    "skip": {
+                                        "type": "string",
+                                        "example": "0"
+                                    },
+                                    "take": {
+                                        "type": "string",
+                                        "example": "10"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/customers": {
+            "post": {
+                "tags": [
+                    "Customer"
+                ],
+                "summary": "create customers",
+                "description": "create customers",
+                "operationId": "create customers",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "personal_phone": {
+                                        "type": "integer"
+                                    },
+                                    "business_phone": {
+                                        "type": "integer"
+                                    },
+                                    "address": {
+                                        "type": "string"
+                                    },
+                                    "date": {
+                                        "type": "string"
+                                    },
+                                    "note": {
+                                        "type": "string"
+                                    },
+                                    "status": {
+                                        "type": "string"
+                                    },
+                                    "mc_number": {
+                                        "type": "string"
+                                    },
+                                    "dot_number": {
+                                        "type": "string"
+                                    },
+                                    "website": {
+                                        "type": "string"
+                                    },
+                                    "invoive_factoring_approvment": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "invoice_mail": {
+                                        "type": "integer",
+                                        "example": 0
+                                    },
+                                    "personal_fax": {
+                                        "type": "integer"
+                                    },
+                                    "business_fax": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/customers/{id}": {
+            "post": {
+                "tags": [
+                    "Customer"
+                ],
+                "summary": "Get customers By ID",
+                "description": "Returns customers full info",
+                "operationId": "get customers ByID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "customer ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/update/customers/{id}": {
+            "post": {
+                "tags": [
+                    "Customer"
+                ],
+                "summary": "update customers",
+                "description": "update customers",
+                "operationId": "update customers",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Customer ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": ""
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "personal_phone": {
+                                        "type": "integer"
+                                    },
+                                    "business_phone": {
+                                        "type": "integer"
+                                    },
+                                    "address": {
+                                        "type": "string"
+                                    },
+                                    "date": {
+                                        "type": "string"
+                                    },
+                                    "note": {
+                                        "type": "string"
+                                    },
+                                    "status": {
+                                        "type": "string"
+                                    },
+                                    "mc_number": {
+                                        "type": "string"
+                                    },
+                                    "dot_number": {
+                                        "type": "string"
+                                    },
+                                    "website": {
+                                        "type": "string"
+                                    },
+                                    "invoive_factoring_approvment": {
+                                        "type": "string"
+                                    },
+                                    "invoice_mail": {
+                                        "type": "string"
+                                    },
+                                    "personal_fax": {
+                                        "type": "integer"
+                                    },
+                                    "business_fax": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/update/customers/{id}/status": {
+            "post": {
+                "tags": [
+                    "Customer"
+                ],
+                "summary": "update customers status ",
+                "description": "update customers status",
+                "operationId": "update customers status",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "customersID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "status": {
+                                        "type": "string",
+                                        "example": ""
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/delete/customers/{id}": {
+            "delete": {
+                "tags": [
+                    "Customer"
+                ],
+                "summary": "delete customers ",
+                "description": "delete customers",
+                "operationId": "delete customers",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "customer ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
         "/all/drivers": {
             "post": {
                 "tags": [
@@ -32,14 +498,42 @@
                             "schema": {
                                 "properties": {
                                     "filter": {
-                                        "type": "string",
-                                        "example": ""
+                                        "type": "array",
+                                        "items": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "example": [
+                                            [
+                                                "endorsements",
+                                                "=",
+                                                "any"
+                                            ],
+                                            [
+                                                "user_id",
+                                                "=",
+                                                "2"
+                                            ]
+                                        ]
                                     },
                                     "columns": {
-                                        "type": "string"
+                                        "type": "array",
+                                        "items": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "example": [
+                                            "id",
+                                            "endorsements",
+                                            "dl_exp"
+                                        ]
                                     },
                                     "sort": {
-                                        "type": "string"
+                                        "type": "object",
+                                        "example": {
+                                            "column": "id",
+                                            "dir": "desc"
+                                        }
                                     },
                                     "skip": {
                                         "type": "string",
@@ -134,13 +628,13 @@
                                         "type": "string"
                                     },
                                     "hazmat": {
-                                        "type": "boolean"
+                                        "type": "integer"
                                     },
                                     "tanker": {
-                                        "type": "boolean"
+                                        "type": "integer"
                                     },
                                     "double_triple": {
-                                        "type": "boolean"
+                                        "type": "integer"
                                     },
                                     "dl_exp": {
                                         "type": "string"
@@ -220,11 +714,22 @@
         "/update/drivers/{id}": {
             "post": {
                 "tags": [
-                    "Employee"
+                    "Driver"
                 ],
                 "summary": "update drivers",
                 "description": "update drivers",
                 "operationId": "update drivers",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "driver ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
@@ -387,7 +892,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "employeeID",
+                        "description": "driver ID",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -427,14 +932,42 @@
                             "schema": {
                                 "properties": {
                                     "filter": {
-                                        "type": "string",
-                                        "example": ""
+                                        "type": "array",
+                                        "items": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "example": [
+                                            [
+                                                "education",
+                                                "=",
+                                                "any"
+                                            ],
+                                            [
+                                                "education",
+                                                "=",
+                                                "any"
+                                            ]
+                                        ]
                                     },
                                     "columns": {
-                                        "type": "string"
+                                        "type": "array",
+                                        "items": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "example": [
+                                            "id",
+                                            "pay_rate_per_hour",
+                                            "education"
+                                        ]
                                     },
                                     "sort": {
-                                        "type": "string"
+                                        "type": "object",
+                                        "example": {
+                                            "column": "id",
+                                            "dir": "desc"
+                                        }
                                     },
                                     "skip": {
                                         "type": "string",
@@ -770,6 +1303,374 @@
                     }
                 ]
             }
+        },
+        "/all/loads": {
+            "post": {
+                "tags": [
+                    "Load"
+                ],
+                "summary": "get all loads",
+                "description": "get all loads",
+                "operationId": "get all loads",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "filter": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "example": [
+                                            [
+                                                "trailer_model",
+                                                "=",
+                                                2
+                                            ],
+                                            [
+                                                "employee_id",
+                                                "=",
+                                                "2"
+                                            ]
+                                        ]
+                                    },
+                                    "columns": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "array",
+                                            "items": {}
+                                        },
+                                        "example": [
+                                            "id",
+                                            "trailer_model",
+                                            "employee_id"
+                                        ]
+                                    },
+                                    "sort": {
+                                        "type": "object",
+                                        "example": {
+                                            "column": "id",
+                                            "dir": "desc"
+                                        }
+                                    },
+                                    "skip": {
+                                        "type": "string",
+                                        "example": "0"
+                                    },
+                                    "take": {
+                                        "type": "string",
+                                        "example": "10"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/loads": {
+            "post": {
+                "tags": [
+                    "Load"
+                ],
+                "summary": "create loads",
+                "description": "create loads",
+                "operationId": "create loads",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "customer_id": {
+                                        "type": "integer",
+                                        "example": ""
+                                    },
+                                    "employee_id": {
+                                        "type": "integer"
+                                    },
+                                    "po_load": {
+                                        "type": "string"
+                                    },
+                                    "load_rate": {
+                                        "type": "integer"
+                                    },
+                                    "loaded_mile": {
+                                        "type": "integer"
+                                    },
+                                    "load_type": {
+                                        "type": "string"
+                                    },
+                                    "trailer_type": {
+                                        "type": "string"
+                                    },
+                                    "status": {
+                                        "type": "string"
+                                    },
+                                    "endorsements": {
+                                        "type": "integer"
+                                    },
+                                    "number_of_stop": {
+                                        "type": "integer"
+                                    },
+                                    "trailer_model": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/loads/{id}": {
+            "post": {
+                "tags": [
+                    "Load"
+                ],
+                "summary": "Get loads By ID",
+                "description": "Returns loads full info",
+                "operationId": "get loads ByID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "load ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/update/loads/{id}": {
+            "post": {
+                "tags": [
+                    "Load"
+                ],
+                "summary": "update loads",
+                "description": "update loads",
+                "operationId": "update loads",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "load ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "customer_id": {
+                                        "type": "integer",
+                                        "example": ""
+                                    },
+                                    "employee_id": {
+                                        "type": "integer"
+                                    },
+                                    "po_load": {
+                                        "type": "string"
+                                    },
+                                    "load_rate": {
+                                        "type": "integer"
+                                    },
+                                    "loaded_mile": {
+                                        "type": "integer"
+                                    },
+                                    "load_type": {
+                                        "type": "string"
+                                    },
+                                    "trailer_type": {
+                                        "type": "string"
+                                    },
+                                    "status": {
+                                        "type": "string"
+                                    },
+                                    "endorsements": {
+                                        "type": "integer"
+                                    },
+                                    "number_of_stop": {
+                                        "type": "integer"
+                                    },
+                                    "trailer_model": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/update/loads/{id}/status": {
+            "post": {
+                "tags": [
+                    "Load"
+                ],
+                "summary": "update loads status ",
+                "description": "update loads status",
+                "operationId": "update loads status",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "load ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "status": {
+                                        "type": "string",
+                                        "example": ""
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
+        },
+        "/delete/loads/{id}": {
+            "delete": {
+                "tags": [
+                    "Load"
+                ],
+                "summary": "delete loads ",
+                "description": "delete loads",
+                "operationId": "delete loads",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "load ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -942,15 +1843,15 @@
                         "title": "invoive_factoring_approvment",
                         "description": "invoive_factoring_approvment",
                         "type": "boolean",
-                        "format": "bool",
-                        "example": false
+                        "format": "boolean",
+                        "example": 1
                     },
                     "invoice_mail": {
                         "title": "invoice_mail",
                         "description": "invoice_mail",
                         "type": "boolean",
-                        "format": "bool",
-                        "example": false
+                        "format": "boolean",
+                        "example": 0
                     },
                     "personal_fax": {
                         "title": "personal_fax",
@@ -1036,22 +1937,22 @@
                         "title": "hazmat",
                         "description": "hazmat",
                         "type": "boolean",
-                        "format": "bool",
-                        "example": "false"
+                        "format": "boolean",
+                        "example": 1
                     },
                     "tanker": {
                         "title": "tanker",
                         "description": "tanker",
                         "type": "boolean",
-                        "format": "bool",
-                        "example": "false"
+                        "format": "boolean",
+                        "example": 1
                     },
                     "double_triple": {
                         "title": "double_triple",
                         "description": "double_triple",
                         "type": "boolean",
-                        "format": "bool",
-                        "example": "false"
+                        "format": "boolean",
+                        "example": 0
                     },
                     "dl_exp": {
                         "title": "dl_exp",
@@ -1720,10 +2621,6 @@
         {
             "name": "Auth User",
             "description": "API Endpoints of Auth User"
-        },
-        {
-            "name": "User",
-            "description": "API Endpoints of User"
         },
         {
             "name": "Employee",

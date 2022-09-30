@@ -144,8 +144,8 @@ class Driver extends Model
      * @OA\Property(
      *     title="hazmat",
      *     description="hazmat",
-     *     format="bool",
-     *     example="false"
+     *     format="boolean",
+     *     example=1
      * )
      *
      * @var bool
@@ -157,8 +157,9 @@ class Driver extends Model
      * @OA\Property(
      *     title="tanker",
      *     description="tanker",
-     *     format="bool",
-     *     example="false"
+     *     format="boolean",
+     *     example=1
+     * 
      * )
      *
      * @var bool
@@ -169,8 +170,8 @@ class Driver extends Model
      * @OA\Property(
      *     title="double_triple",
      *     description="double_triple",
-     *     format="bool",
-     *     example="false"
+     *     format="boolean",
+     *     example=0
      * )
      *
      * @var bool
